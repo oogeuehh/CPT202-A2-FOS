@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>customer</title>
+    <script src="https://kit.fontawesome.com/5b19e49b1c.js" crossorigin="anonymous"></script>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        margin: 0;
+    }
+    *{
+        box-sizing:border-box;
+    }
+    body{
+        margin-top:0px;
+        margin-right:0px;
+        margin-bottom:0px;
+        margin-left:0px;
+        font-family:-apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Roboto, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Jhenghei", sans-serif;
+    }
+    .logo path{
+        pointer-events:none;
+        fill:none;
+        stroke-linecap:round;
+        stroke-width:7;
+        stroke:rgb(255, 255, 255);
+    }
+    .wechat-group img{
+        max-width:220px;
+        height:auto;
+        border-top-left-radius:8px;
+        border-top-right-radius:8px;
+        border-bottom-right-radius:8px;
+        border-bottom-left-radius:8px;
+        margin-top:0px;
+        margin-right:auto;
+        margin-bottom:0px;
+        margin-left:auto;
+        width:100%;
+    }
+    .welcome-img img{
+        width:100%;
+    }
+    .c2614{
+        width:85%;
+    }
+    .c2679{
+        width:90%;
+    }
+    .c2742{
+        width:75%;
+    }
+    .c2805{
+        width:70%;
+    }
+    .fa-user-circle {
+        margin-right: 18px;  /* 右边距为8像素 */
+    }
+    /*.container-about {*/
+    /*    background-image: linear-gradient(to right, #FF6347, #FFA500);*/
+
+    /*}*/
+    /********导航栏********************************************/
+
+    .navigation {
+
+        background-color: #f8f9fa; /* 导航栏背景颜色 */
+        padding: 20px 0; /* 上下内边距 */
+        border-bottom: 1px solid #ddd; /* 底部边框 */
+    }
+
+    .navigation ul {
+        list-style-type: none; /* 去除列表项的默认样式 */
+        margin: 0; /* 去除外边距 */
+        padding: 0; /* 去除内边距 */
+    }
+
+    .navigation li {
+        display: inline-block; /* 列表项水平排列 */
+        margin-right: 20px; /* 右侧间距 */
+    }
+
+    .navigation li:last-child {
+        margin-right: 0; /* 最后一个列表项去除右侧间距 */
+    }
+
+    .navigation a {
+        color: #2c0808; /* 链接文字颜色 */
+        text-decoration: none; /* 去除下划线 */
+        font-weight: bold; /* 文字加粗 */
+        font-size: 20px;
+    }
+
+    .navigation a:hover {
+        color: #dc3545; /* 鼠标悬停时链接文字颜色 */
+    }
+
+    .section-btn a.small-btn i.fa {
+        font-size: 20px; /* 设置图标的字体大小 */
+    }
+
+    #about{
+        background-image: linear-gradient(to right, #FF6347, #FFA500);
+    }
+    .container-about{
+        margin: 0 auto; /* 左右外边距为auto，使元素水平居中 */
+        width: 60%; /* 设置元素宽度 */
+        height: 400px;
+    }
+</style>
+<body>
+
+
+<div class="content">
+    <div>
+        <link rel="preload" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/fonts/fontawesome-webfont.woff2" as="font" type="font/woff2" crossorigin=""/>
+        <!--        <link rel="preload" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/home-bg.jpg" as="image" crossorigin=""/>-->
+        <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/magnific-popup.css"/>
+        <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/font-awesome.min.css"/>
+        <!-- MAIN CSS -->
+        <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/templatemo-style.css"/>
+
+<!--        <section role="navigation" class="navbar custom-navbar navbar-fixed-top">-->
+        <section class = "navigation">
+            <div class="container">
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-nav-first">
+                        <li>
+                            <a href="/customer/CustomMenu" >Menu</a>
+                        </li>
+
+                        <li>
+                            <a href="/cart/viewCart" >Cart</a>
+                        </li>
+
+                        <li>
+                            <a href="/customer/allPastOrder" >Orders</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#"><i class="fa fa-bookmark"></i></a>
+                        </li>
+                        <li>
+                            <a href="/user/profile"><i class ="fa fa-user-circle"></i>Profile</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container-about">
+                <div class="row">
+                    <div class="col-md-5 col-sm-6">
+                        <div class="about-info">
+                            <div class="section-title">
+                                <h2>Let us introduce</h2>
+
+                            </div>
+                            <p style="color: #f0f0f0">Welcome to our restaurant, where culinary excellence meets warm hospitality. Our restaurant offers a delightful fusion of flavors from around the world, crafted with care and creativity by our talented chefs. </p>
+
+                        </div>
+                        <a href="/customer/CustomMenu" class="btn section-btn smoothScroll">Start ordering</a>
+
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="about-image" style="transform: scale(2); margin-top:40px; margin-left: 100px">
+                            <img src="/image/6083jpg_wh860.jpg" alt="" class="img-responsive"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="work" data-stellar-background-ratio="0.5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="section-title">
+                            <h2>Our Specialty Dish
+                            </h2>
+                            <span class="line-bar">...</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <!-- WORK THUMB -->
+                        <div class="work-thumb">
+                            <a href="/menu/detail/20"><img src="/image/grilled_chicken_breast.jpg" alt="Work" class="img-responsive"/><div class="work-info">
+                                <h3>Grilled Vegetable Skewers
+                                </h3>
+                                <small>detail</small>
+                            </div></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <!-- WORK THUMB -->
+                        <div class="work-thumb">
+                            <a href="/menu/detail/1"><img src="/image/fried_chicken.jpg" alt="Work" class="img-responsive"/><div class="work-info">
+                                <h3>Fried Chicken
+                                </h3>
+                                <small>detail</small>
+                            </div></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <!-- WORK THUMB -->
+                        <div class="work-thumb">
+                            <a href="/menu/detail/2"><img src="/image/french_fries.jpg" alt="Work" class="img-responsive"/><div class="work-info">
+                                <h3>French Fries
+                                </h3>
+                                <small>detail</small>
+                            </div></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <!-- WORK THUMB -->
+                        <div class="work-thumb">
+                            <a href="/menu/detail/10"><img src="/image/chicken_chow_mein.jpg" alt="Work" class="img-responsive"/><div class="work-info">
+                                <h3>Chicken Chow Mein
+                                </h3>
+                                <small>detail</small>
+                            </div></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- BLOG -->
+        <section id="blog" data-stellar-background-ratio="0.5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="section-title">
+                            <h2>Our Set meal
+                            </h2>
+                            <span class="line-bar">...</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <!-- BLOG THUMB -->
+                        <div class="media blog-thumb">
+                            <div class="media-object media-left">
+                                <a href="blog-detail.html"><img src="/image/stm1.jpg" alt="" class="img-responsive"/></a>
+                            </div>
+                            <div class="media-body blog-info">
+                                <small><i class="fa fa-clock-o">
+                                </i> Highest sales</small>
+                                <h3>
+                                    <a href="blog-detail.html">Seasonal Delights</a>
+                                </h3>
+                                <p>A lavish feast of tender duck, perfectly crisped to golden perfection, served with a sweet and savory glaze that tantalizes the taste buds.</p>
+                                <a href="blog-detail.html" class="btn section-btn">View Detail</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <!-- BLOG THUMB -->
+                        <div class="media blog-thumb">
+                            <div class="media-object media-left">
+                                <a href="blog-detail.html"><img src="/image/stm2.png" alt="" class="img-responsive"/></a>
+                            </div>
+                            <div class="media-body blog-info">
+                                <small><i class="fa fa-leaf">
+                                </i>limited seasons</small>
+                                <h3>
+                                    <a href="blog-detail.html">Flavors of the World</a>
+                                </h3>
+                                <p>An elegant assortment of succulent shrimp, bathed in a creamy, velvety sauce, accompanied by a medley of delicate herbs.
+                                </p>
+                                <a href="blog-detail.html" class="btn section-btn">View Detail</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <!-- BLOG THUMB -->
+                        <div class="media blog-thumb">
+                            <div class="media-object media-left">
+                                <a href="blog-detail.html"><img src="/image/stm3.jpg" alt="" class="img-responsive"/></a>
+                            </div>
+                            <div class="media-body blog-info">
+                                <small><i class="	fa fa-heart">
+                                </i>Highest reviews</small>
+                                <h3>
+                                    <a href="blog-detail.html">Coastal Journey </a>
+                                </h3>
+                                <p>A rich and creamy risotto, loaded with a variety of earthy mushrooms, infused with white wine and finished with a sprinkle of Parmesan.
+                                </p>
+                                <a href="blog-detail.html" class="btn section-btn">View Detail</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <!-- BLOG THUMB -->
+                        <div class="media blog-thumb">
+                            <div class="media-object media-left">
+                                <a href="blog-detail.html"><img src="/image/stm4.jpg" alt="" class="img-responsive"/></a>
+                            </div>
+                            <div class="media-body blog-info">
+                                <small><i class="fa fa-fire">
+                                </i> Signage</small>
+                                <h3>
+                                    <a href="blog-detail.html">Garden Fresh Collection</a>
+                                </h3>
+                                <p>Juicy chicken breasts marinated and cooked with fresh basil and a touch of citrus, creating a light, flavorful dish that's simply blissful.
+                                </p>
+                                <a href="blog-detail.html" class="btn section-btn">View Detail</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- CONTACT -->
+        <section id="contact" data-stellar-background-ratio="0.5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="section-title">
+                            <h2>Contact us
+                            </h2>
+                            <span class="line-bar">...</span>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                        <!-- CONTACT FORM HERE -->
+                        <form method="post" id="contact-form" role="form" action="#">
+                            <div class="col-md-6 col-sm-6">
+                                <input type="text" placeholder="Full Name" id="cf-name" name="cf-name" required class="form-control"/>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <input type="email" placeholder="Your Email" id="cf-email" name="cf-email" required class="form-control"/>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <input type="tel" placeholder="Your Phone" id="cf-number" name="cf-number" required class="form-control"/>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <select id="cf-budgets" name="cf-budgets" class="form-control"><option>Budget Level</option><option>$500 to $1,000</option><option>$1,000 to $2,200</option><option>$2,200 to $4,500</option><option>$4,500 to $7,500</option><option>$7,500 to $12,000</option><option>$12,000 or more</option></select>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <textarea rows="6" placeholder="Your requirements" id="cf-message" name="cf-message" required class="form-control"></textarea>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <input type="submit" name="submit" value="Send Message" class="form-control"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="google-map">
+                            <div>
+                                <img src="https://coscdn.htmlpage.cn/2022/05/20220505154307881.png"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- FOOTER -->
+        <footer data-stellar-background-ratio="0.5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-sm-12">
+                        <div class="footer-thumb footer-info">
+                            <h2>Hydro Company
+                            </h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4">
+                        <div class="footer-thumb">
+                            <h2>Company
+                            </h2>
+                            <ul class="footer-link">
+                                <li>
+                                    <a href="#">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="#">Join our team</a>
+                                </li>
+                                <li>
+                                    <a href="#">Read Blog</a>
+                                </li>
+                                <li>
+                                    <a href="#">Press</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4">
+                        <div class="footer-thumb">
+                            <h2>Services
+                            </h2>
+                            <ul class="footer-link">
+                                <li>
+                                    <a href="#">Pricing</a>
+                                </li>
+                                <li>
+                                    <a href="#">Documentation</a>
+                                </li>
+                                <li>
+                                    <a href="#">Support</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4">
+                        <div class="footer-thumb">
+                            <h2>Find us
+                            </h2>
+                            <p>123 Grand Rama IX,
+                                <br/> Krung Thep Maha Nakhon 10400
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="footer-bottom">
+                            <div class="col-md-6 col-sm-5">
+                                <div class="copyright-text">
+                                    <p>Copyright © 2021 Your Company
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-7">
+                                <div class="phone-contact">
+                                    <p>Call us
+                                        <span>(+66) 010-020-0340</span>
+                                    </p>
+                                </div>
+                                <ul class="social-icon">
+                                    <li>
+                                        <a href="#" attr="facebook icon" class="fa fa-facebook-square"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="fa fa-twitter"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="fa fa-instagram"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- MODAL -->
+        <section id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-popup">
+                    <div class="modal-header">
+                        <button type="button" data-dismiss="modal" aria-label="Close" class="close">Send</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="modal-title">
+                                        <h2>Hydro Co
+                                        </h2>
+                                    </div>
+                                    <!-- NAV TABS -->
+                                    <ul role="tablist" class="nav nav-tabs">
+                                        <li class="active">
+                                            <a href="#sign_up" aria-controls="sign_up" role="tab" data-toggle="tab">Create an account</a>
+                                        </li>
+                                        <li>
+                                            <a href="#sign_in" aria-controls="sign_in" role="tab" data-toggle="tab">Sign In</a>
+                                        </li>
+                                    </ul>
+                                    <!-- TAB PANES -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" id="sign_up" class="tab-pane fade in active">
+                                            <form method="post" action="#">
+                                                <input type="text" name="name" placeholder="Name" required class="form-control"/>
+                                                <input type="telephone" name="telephone" placeholder="Telephone" required class="form-control"/>
+                                                <input type="email" name="email" placeholder="Email" required class="form-control"/>
+                                                <input type="password" name="password" placeholder="Password" required class="form-control"/>
+                                                <input type="submit" name="submit" value="Submit Button" class="form-control"/>
+                                            </form>
+                                        </div>
+                                        <div role="tabpanel" id="sign_in" class="tab-pane fade in">
+                                            <form method="post" action="#">
+                                                <input type="email" name="email" placeholder="Email" required class="form-control"/>
+                                                <input type="password" name="password" placeholder="Password" required class="form-control"/>
+                                                <input type="submit" name="submit" value="Submit Button" class="form-control"/>
+                                                <a href="#">Forgot your password?</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- SCRIPTS -->
+        <script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/jquery.js"></script>
+        <script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/bootstrap.min.js"></script>
+        <script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/jquery.stellar.min.js"></script>
+        <script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/jquery.magnific-popup.min.js"></script>
+<!--        <script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/smoothscroll.js"></script>-->
+        <script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/custom.js"></script>
+    </div>
+</div>
+</body>
+</html>

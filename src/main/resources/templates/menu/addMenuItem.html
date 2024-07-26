@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add MenuItem</title>
+    <!--    <link href="/css/update_new.css" rel="stylesheet">-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-image: linear-gradient(to right, #FF6347, #FFA500);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input[type=text] {
+            width: 100%;
+            padding: 8px 16px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            box-shadow: inset 1px 1px 3px #aaa;
+            border-radius: 10px;
+        }
+
+        button {
+            border-color: black;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .menu-detail {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .back-button-container {
+            position: absolute; /* Position it relative to the nearest positioned ancestor */
+            top: 10px; /* Space from the top */
+            left: 10px; /* Space from the right */
+            z-index: 100; /* Make sure it's above other elements */
+            padding: 8px 16px; /* 按钮内边距，可以根据需要调整 */
+            background-color: #ffffff;
+            color: #f16b00; /* 文字颜色为白色 */
+            border: none; /* 无边框 */
+            cursor: pointer; /* 鼠标悬停时显示指针 */
+            border-radius: 5px; /* 圆角边框 */
+            font-size: 16px; /* 字体大小 */
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+<div class="back-button-container">
+    <a class="back-button">&lt; Back</a>
+</div>
+<h1>Add MenuItem</h1>
+<div class="menu-detail">
+    <div>
+        <form action="/menu/insertMenuItem" method="post" >
+            Name:<input type="text" th:value="${name}" name="name"><br>
+            Taste:<input type="text" th:value="${taste}" name="taste"><br>
+            <label for="smallPrice">Small Price:</label>
+            <input type="text" id="smallPrice" name="smallPrice" step="0.01"><br><br>
+
+            <label for="mediumPrice">Medium Price:</label>
+            <input type="text" id="mediumPrice" name="mediumPrice" step="0.01"><br><br>
+
+            <label for="largePrice">Large Price:</label>
+            <input type="text" id="largePrice" name="largePrice" step="0.01"><br><br>
+            Description:<input type="text" th:value="${descr}" name="descr"><br><br>
+
+            <input type="checkbox" id="spicinessCheckbox" name="spiciness" value="spiciness" onchange="updateFlavorName(this.checked)">
+            <label for="spicinessCheckbox">Spiciness</label><br><br>
+
+            <input type="checkbox" id="cilantroCheckbox" name="cilantro" value="cilantro" onchange="updateFlavorName(this.checked)">
+            <label for="cilantroCheckbox">Cilantro</label><br><br>
+
+            <input type="checkbox" id="greenOnionCheckbox" name="greenOnion" value="greenOnion" onchange="updateFlavorName(this.checked)">
+            <label for="greenOnionCheckbox">Green Onion</label><br><br>
+
+            <input type="checkbox" id="garlicCheckbox" name="garlic" value="garlic" onchange="updateFlavorName(this.checked)">
+            <label for="garlicCheckbox">Garlic</label><br><br>
+
+            Type:
+            <select name="type" required="required">
+                <option th:each="type : ${typeList}"
+                        th:value="${type.id}"
+                        th:text="${type.typeName}"
+                        th:selected="${type.id == 1}"></option>
+            </select><br>
+            <br>
+
+
+
+            <button>SAVE</button>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" color="54,54,54" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><!--背景-->
+
+</body>
+</html>

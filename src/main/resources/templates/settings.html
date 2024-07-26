@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <style>
+
+        body{
+            color: #8e9194;
+            background-color: #f4f6f9;
+        }
+        .list-group {
+            display: flex;
+            flex-direction: column;
+            padding-left: 0;
+            margin-bottom: 0;
+            border-radius: 0.25rem;
+        }
+
+        .list-group-item {
+            position: relative;
+            display: block;
+            padding: 0.75rem 1.25rem;
+            background-color: #ffffff;
+            border: 1px solid #eef0f3;
+        }
+        .list-group-item:first-child {
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+        .list-group-item:last-child {
+            border-bottom-right-radius: inherit;
+            border-bottom-left-radius: inherit;
+        }
+        .list-group-item.disabled,
+        .list-group-item:disabled {
+            color: #6d7174;
+            pointer-events: none;
+            background-color: #ffffff;
+        }
+        .list-group-item.active {
+            z-index: 2;
+            color: #ffffff;
+            background-color: #1b68ff;
+            border-color: #1b68ff;
+        }
+        .list-group-item + .list-group-item {
+            border-top-width: 0;
+        }
+        .list-group-item + .list-group-item.active {
+            margin-top: -1px;
+            border-top-width: 1px;
+        }
+
+        .list-group-horizontal > .list-group-item:first-child {
+            border-bottom-left-radius: 0.25rem;
+            border-top-right-radius: 0;
+        }
+        .list-group-horizontal > .list-group-item:last-child {
+            border-top-right-radius: 0.25rem;
+            border-bottom-left-radius: 0;
+        }
+        .list-group-horizontal > .list-group-item.active {
+            margin-top: 0;
+        }
+        .list-group-horizontal > .list-group-item + .list-group-item {
+            border-top-width: 1px;
+            border-left-width: 0;
+        }
+        .list-group-horizontal > .list-group-item + .list-group-item.active {
+            margin-left: -1px;
+            border-left-width: 1px;
+        }
+
+        @media (min-width: 576px) {
+            .list-group-horizontal-sm > .list-group-item:first-child {
+                border-bottom-left-radius: 0.25rem;
+                border-top-right-radius: 0;
+            }
+            .list-group-horizontal-sm > .list-group-item:last-child {
+                border-top-right-radius: 0.25rem;
+                border-bottom-left-radius: 0;
+            }
+            .list-group-horizontal-sm > .list-group-item.active {
+                margin-top: 0;
+            }
+            .list-group-horizontal-sm > .list-group-item + .list-group-item {
+                border-top-width: 1px;
+                border-left-width: 0;
+            }
+            .list-group-horizontal-sm > .list-group-item + .list-group-item.active {
+                margin-left: -1px;
+                border-left-width: 1px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .list-group-horizontal-md > .list-group-item:first-child {
+                border-bottom-left-radius: 0.25rem;
+                border-top-right-radius: 0;
+            }
+            .list-group-horizontal-md > .list-group-item:last-child {
+                border-top-right-radius: 0.25rem;
+                border-bottom-left-radius: 0;
+            }
+            .list-group-horizontal-md > .list-group-item.active {
+                margin-top: 0;
+            }
+            .list-group-horizontal-md > .list-group-item + .list-group-item {
+                border-top-width: 1px;
+                border-left-width: 0;
+            }
+            .list-group-horizontal-md > .list-group-item + .list-group-item.active {
+                margin-left: -1px;
+                border-left-width: 1px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .list-group-horizontal-lg > .list-group-item:first-child {
+                border-bottom-left-radius: 0.25rem;
+                border-top-right-radius: 0;
+            }
+            .list-group-horizontal-lg > .list-group-item:last-child {
+                border-top-right-radius: 0.25rem;
+                border-bottom-left-radius: 0;
+            }
+            .list-group-horizontal-lg > .list-group-item.active {
+                margin-top: 0;
+            }
+            .list-group-horizontal-lg > .list-group-item + .list-group-item {
+                border-top-width: 1px;
+                border-left-width: 0;
+            }
+            .list-group-horizontal-lg > .list-group-item + .list-group-item.active {
+                margin-left: -1px;
+                border-left-width: 1px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .list-group-horizontal-xl > .list-group-item:first-child {
+                border-bottom-left-radius: 0.25rem;
+                border-top-right-radius: 0;
+            }
+            .list-group-horizontal-xl > .list-group-item:last-child {
+                border-top-right-radius: 0.25rem;
+                border-bottom-left-radius: 0;
+            }
+            .list-group-horizontal-xl > .list-group-item.active {
+                margin-top: 0;
+            }
+            .list-group-horizontal-xl > .list-group-item + .list-group-item {
+                border-top-width: 1px;
+                border-left-width: 0;
+            }
+            .list-group-horizontal-xl > .list-group-item + .list-group-item.active {
+                margin-left: -1px;
+                border-left-width: 1px;
+            }
+        }
+
+        .list-group-flush > .list-group-item {
+            border-width: 0 0 1px;
+        }
+        .list-group-flush > .list-group-item:last-child {
+            border-bottom-width: 0;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+            <h2 class="h3 mb-4 page-title">Settings</h2>
+            <div class="my-4">
+                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        Notifications
+                        <a class="switch">
+                            <div class="col-auto">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="alert0" checked="" />
+                                    <span class="custom-control-label"></span>
+                                </div>
+                            </div>
+                        </a>
+
+                    </li>
+
+                </ul>
+                <p>Whether you want to receive notification.
+
+                <hr class="my-4" />
+                <strong class="mb-0">Privacy</strong>
+                <p>Control your private information.</p>
+                <div class="list-group mb-5 shadow">
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+
+                            <div class="col">
+                                <strong class="mb-0">Your Favorites</strong>
+                                <p class="text-muted mb-0">Whether others can see your favorites.</p>
+                            </div>
+                            <div class="col-auto">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="alert1" checked="" />
+                                    <span class="custom-control-label"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <strong class="mb-0">Your History</strong>
+                                <p class="text-muted mb-0">Whether others can see your history.</p>
+                            </div>
+                            <div class="col-auto">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="alert2" />
+                                    <span class="custom-control-label"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript" color="54,54,54" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><!--背景-->
+
+</body>
+</html>

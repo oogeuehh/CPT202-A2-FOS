@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+<!--    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">-->
+    <style>
+        .sidebar {
+            width: 300px; /* 统一设置侧边栏宽度为200px */
+            height: 100%;
+            font-family: Arial, sans-serif; /* 设置字体样式 */
+            font-size: 16px; /* 设置字体大小 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-image: linear-gradient(to right, #FF6347, #FFA500);
+            padding-top: 40px;
+        }
+
+        .sidebar a {
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            color: #fff;
+            font-size: 16px; /* 统一设置链接字体大小 */
+        }
+
+        .sidebar li:last-child {
+            position: fixed;
+            bottom: 50px;
+            left: 0;
+        }
+
+        .sidebar li:nth-last-child(2) {
+            position: fixed;
+            bottom: 100px;
+            left: 0;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+        }
+
+        .sidebar h1 {
+            color: #f0f0f0;
+            margin-right: 15px;
+            margin-left: 15px;
+            display: flex;
+            align-items: center; /* 垂直居中对齐 */
+            font-size: 18px; /* 统一设置标题字体大小 */
+        }
+
+        .sidebar h1 i {
+            margin-right: 15px;
+        }
+
+        .sidebar li {
+            list-style-type: none;
+            font-size: 16px; /* 统一设置列表项字体大小 */
+            height: 50px;
+            width: 200px; /* 统一设置列表项宽度为200px */
+        }
+
+        .sidebar li a {
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar li a i {
+            margin-right: 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- 侧边栏内容 -->
+<div class="sidebar" th:fragment="sidebarContent">
+
+    <h1><i class="fa fa-reorder"></i>Dashboard</h1>
+    <li><a href="/homepage"><i class="fa fa-home"></i> Home Page</a></li>
+    <li><a href="/Order/all"><i class="fas fa-shopping-basket"></i> Order management</a></li>
+    <li><a href="/user/customerList"><i class="fa fa-address-card"></i>  Account management</a></li>
+    <li><a href="/menu/menuItemList"><i class="fa fa-glass"></i> Menus</a></li>
+    <li><a href="/type/typeList"><i class="fa fa-coffee"></i> type</a></li>
+    <li><a href="/Order/monthlySummary"><i class="fa fa-line-chart"></i>   Income Statement</a></li>
+    <li><a href="/login"><i class="fa fa-sign-out"></i>  Logout</a></li>
+    <li><a href="#"><i class="fa fa-gear"></i>  Setting</a></li>
+  </div>
+<script type="text/javascript" color="54,54,54" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><!--背景-->
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>orderInfo homepage</title>
+    <script src="https://kit.fontawesome.com/5b19e49b1c.js" crossorigin="anonymous"></script>
+    <style type="text/css">
+        /*table {border-collapse: collapse; font-size: 14px;*/
+        /*    width: 80%; margin: auto}*/
+        /*table, th, td {border: 0px solid darkslategray;padding: 10px}*/
+        .btgn{
+            font-family: "Microsoft YaHei UI";
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #f16b00;
+            text-align: center;
+        }
+
+        /*tr:nth-child(2n){*/
+        /*    background-color: #fffdf5;*/
+        /*}*/
+        /*tr:nth-child(2n+1) {*/
+        /*    background-color: #f2fbfb;*/
+        /*}*/
+        #orderTable thead, #orderTable tr {
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: blanchedalmond;
+            line-height: 4;
+            border-radius: 5px; /* 圆角边框 */
+        }
+        #orderTable {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: blanchedalmond;
+            width: 100%;
+        }
+
+        /* Padding and font style */
+        #orderTable td, #orderTable th {
+            padding: 5px 10px;
+            font-size: 15px;
+            font-family: Verdana;
+            color: black;
+        }
+
+        /* Alternating background colors */
+        #orderTable tr:nth-child(even) {
+            background: #FFCC99;
+        }
+        #orderTable tr:nth-child(odd) {
+            background: #FFF
+        }
+
+        .content {
+            margin-left: 50px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .pagination {
+            text-align: center; /* 将页码居中显示 */
+        }
+
+        .pagination div {
+            display: inline-block; /* 将每个页码容器设置为内联块级元素 */
+        }
+
+        .pagination a,
+        .pagination span {
+            padding: 5px 10px; /* 给页码添加一些内边距 */
+            text-decoration: none; /* 移除链接的下划线 */
+            color: #333; /* 设置页码的颜色 */
+        }
+
+        .pagination .active a {
+            font-weight: bold; /* 设置当前页码为粗体 */
+            color: #fff; /* 设置当前页码的文本颜色 */
+            background-color: #007bff; /* 设置当前页码的背景颜色 */
+        }
+
+        .pagination .disabled a,
+        .pagination .disabled span {
+            pointer-events: none; /* 禁用禁用状态下的链接 */
+            color: #6c757d; /* 设置禁用状态下的文本颜色 */
+        }
+        /*****************************************************************/
+        .navigation {
+
+            background-color: #f8f9fa; /* 导航栏背景颜色 */
+            padding: 20px 0; /* 上下内边距 */
+            border-bottom: 1px solid #ddd; /* 底部边框 */
+        }
+
+        .navigation ul {
+            list-style-type: none; /* 去除列表项的默认样式 */
+            margin: 0; /* 去除外边距 */
+            padding: 0; /* 去除内边距 */
+        }
+
+        .navigation li {
+            display: inline-block; /* 列表项水平排列 */
+            margin-right: 20px; /* 右侧间距 */
+        }
+
+        .navigation li:last-child {
+            margin-right: 0; /* 最后一个列表项去除右侧间距 */
+        }
+
+        .navigation a {
+            color: #2c0808; /* 链接文字颜色 */
+            text-decoration: none; /* 去除下划线 */
+            font-weight: bold; /* 文字加粗 */
+            font-size: 20px;
+        }
+
+        .navigation a:hover {
+            color: #dc3545; /* 鼠标悬停时链接文字颜色 */
+        }
+
+        .section-btn a.small-btn i.fa {
+            font-size: 20px; /* 设置图标的字体大小 */
+        }
+
+
+
+
+    </style>
+</head>
+
+<body>
+<section class = "navigation">
+    <link rel="preload" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/fonts/fontawesome-webfont.woff2" as="font" type="font/woff2" crossorigin=""/>
+    <!--        <link rel="preload" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/home-bg.jpg" as="image" crossorigin=""/>-->
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/magnific-popup.css"/>
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/font-awesome.min.css"/>
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/templatemo-style.css"/>
+    <div class="container">
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-nav-first">
+                <li>
+                    <a href="/customer/homepage" >Homepage</a>
+                </li>
+                <li>
+                    <a href="/customer/CustomMenu" >Menu</a>
+                </li>
+
+                <li>
+                    <a href="/cart/viewCart" >Cart</a>
+                </li>
+
+                <li>
+                    <a href="/customer/allPastOrder" >Orders</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#"><i class="fa fa-bookmark"></i></a>
+                </li>
+                <li>
+                    <a href="/user/profile"><i class ="fa fa-user-circle"></i>Profile</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div class="back-button-container">
+    <a href="/customer/homepage" class="back-button">&lt; Back</a>
+</div>
+<div class="content">
+    <span class="span" style="color: darkslategray; font-size: 30px" >Order Information</span>
+    <hr/>
+    <!--    <a  href="add"><input type="submit" value="New orderInfo"></a>-->
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-8">
+                <form class="form-inline" action="/Order/keywords?search=search" method="GET">
+                    <div class="form-group m-r-10">
+                        <input class="form-control" type="text" value="" id="keywords" name="keywords" placeholder="模糊查询" data-parsley-required="true">
+                        <button type="submit" class="btn btn-sm btn-primary m-r-5 ajax-form-search"><i class="fa fa-search m-r-5"></i>搜索</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <table id="orderTable">
+        <tr>
+            <th class="btgn">user name</th>
+            <th class="btgn">user address</th>
+            <th class="btgn">phone</th>
+            <!--            <th class="btgn">回复</th>-->
+            <th class="btgn">order time</th>
+            <!--            <th class="btgn">修改状态时间</th>-->
+            <th class="btgn">operation</th>
+            <th class="btgn">consignee</th>
+            <th class="btgn">total</th>
+            <th class="btgn">status</th>
+<!--            <th class="btgn">是否已下单</th>-->
+        </tr>
+        <tr th:each="orderInfo : ${pageInfo.list}">
+            <td th:text="${orderInfo.userName}"></td>
+            <td th:text="${orderInfo.address}"></td>
+            <td th:text="${orderInfo.phone}"></td>
+            <td th:text="${orderInfo.orderTime}"></td>
+            <td>
+<!--                <a th:href="@{'/Order/edit/' + ${orderInfo.id}}"><input type="submit" value="修改订单"></a>-->
+                <!--                <a th:href="@{'/Order/Cedit?id=' + ${orderInfo.id}}"><input type="submit" value="用户修改订单"></a>-->
+                <a th:href="@{'/customer/viewDetail/' + ${orderInfo.id}}"><input type="submit" value="detail"></a>
+<!--                <a onclick="return confirm('确定删除当前数据?')" th:href="@{'/Order/delete/' + ${orderInfo.id}}"><input type="submit" value="删除订单"></a>-->
+            </td>
+            <td th:text="${orderInfo.consignee}"></td>
+            <td th:text="${orderInfo.amount}"></td>
+            <td>
+                <span th:switch="${orderInfo.status}">
+                <span th:case="1">Pending Payment</span>
+                <span th:case="2">Waiting for Order Preparation</span>
+                <span th:case="3">Wait for receiving</span>
+                <span th:case="4">Received</span>
+                <span th:case="5">Evaluated</span>
+                <span th:case="6">Cancelled</span>
+                <span th:case="*">Unknown Status</span>
+                </span>
+            </td>
+
+    </table>
+
+    <div th:if="${pageInfo.pages > 1}" class="pagination">
+        <!-- 上一页 -->
+        <div th:class="${pageInfo.hasPreviousPage} ? '' : 'disabled'">
+            <a th:if="${pageInfo.hasPreviousPage}" th:href="@{'?pageNum=' + ${pageInfo.prePage} + '&pageSize=' + ${pageInfo.pageSize}}">&laquo;</a>
+            <span th:if="${!pageInfo.hasPreviousPage}">&laquo;</span>
+        </div>
+        <!-- 页码 -->
+        <div th:each="pageNumber : ${#numbers.sequence(1, pageInfo.pages)}" th:class="${pageNumber == pageInfo.pageNum} ? 'active' : ''">
+            <a th:href="@{'?pageNum=' + ${pageNumber} + '&pageSize=' + ${pageInfo.pageSize}}" th:text="${pageNumber}"></a>
+        </div>
+        <!-- 下一页 -->
+        <div th:class="${pageInfo.hasNextPage} ? '' : 'disabled'">
+            <a th:if="${pageInfo.hasNextPage}" th:href="@{'?pageNum=' + ${pageInfo.nextPage} + '&pageSize=' + ${pageInfo.pageSize}}">&raquo;</a>
+            <span th:if="${!pageInfo.hasNextPage}">&raquo;</span>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" color="54,54,54" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><!--背景-->
+
+</body>
+
+</html>

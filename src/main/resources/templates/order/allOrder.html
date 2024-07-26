@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>orderInfo homepage</title>
+    <script src="https://kit.fontawesome.com/5b19e49b1c.js" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/magnific-popup.css"/>
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/font-awesome.min.css"/>
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/templatemo-style.css"/>
+    <style>
+        /*new table style*/
+        #orderTable thead, #orderTable tr {
+            border-top-width: 20px;
+            border-top-style: solid;
+            border-top-color: blanchedalmond;
+        }
+        #orderTable {
+            border-bottom-width: 20px;
+            border-bottom-style: solid;
+            border-bottom-color: blanchedalmond;
+            width: 90%;
+        }
+
+        /* Padding and font style */
+        #orderTable td, #orderTable th {
+            padding: 10px 10px;
+            font-size: 15px;
+            /*font-family: Verdana;*/
+            color: black;
+        }
+
+        /* Alternating background colors */
+        #orderTable tr:nth-child(even) {
+            background: #FFCC99;
+        }
+        #orderTable tr:nth-child(odd) {
+            background: #FFF
+        }
+
+        .content {
+            margin-left: 300px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 300px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            /*background-color: #333;*/
+            background-image: linear-gradient(to right, #FF6347, #FFA500);
+            padding-top: 40px;
+        }
+
+        .sidebar a {
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            color: #fff;
+        }
+
+        .sidebar li:last-child {
+            position: fixed;
+            bottom: 50px;
+            left: 0;
+        }
+
+        .sidebar li:nth-last-child(2) {
+            position: fixed;
+            bottom: 100px;
+            left: 0;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+        }
+        .sidebar h1{
+            color: #f0f0f0;
+            margin-right: 15px;
+            margin-left: 15px;
+            display: flex;
+            align-items: center; /* 垂直居中对齐 */
+
+        }
+
+        .sidebar h1 i {
+            margin-right: 15px;
+        }
+
+        .sidebar li {
+            list-style-type: none;
+            font-size: 18px;
+            height: 50px;
+            width: 300px;
+
+        }
+        .sidebar li a {
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar li a i {
+            margin-right: 15px;
+        }
+
+        .pagination {
+            text-align: center; /* 将页码居中显示 */
+        }
+
+        .pagination div {
+            display: inline-block; /* 将每个页码容器设置为内联块级元素 */
+        }
+
+        .pagination a,
+        .pagination span {
+            padding: 5px 10px; /* 给页码添加一些内边距 */
+            text-decoration: none; /* 移除链接的下划线 */
+            color: #333; /* 设置页码的颜色 */
+        }
+
+        .pagination .active a {
+            font-weight: bold; /* 设置当前页码为粗体 */
+            color: #fff; /* 设置当前页码的文本颜色 */
+            background-color: #007bff; /* 设置当前页码的背景颜色 */
+        }
+
+        .pagination .disabled a,
+        .pagination .disabled span {
+            pointer-events: none; /* 禁用禁用状态下的链接 */
+            color: #6c757d; /* 设置禁用状态下的文本颜色 */
+        }
+
+        .btgn {
+            background-color: #f16b00;
+            color: white; /* 白色文字 */
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+<div class="sidebar" th:replace="sidebar :: sidebarContent"></div>
+
+
+<div class="content">
+    <span class="span"  style="color: #f16b00; font-size: 40px;font-weight: bold" >Manage orders</span>
+    <hr/>
+
+<div class="panel-body">
+   <div class="row">
+    <div class="search-bar">
+        <form class="form-inline" action="/Order/keywords?search=search" method="GET">
+
+                <input class="form-control" type="text" value="" id="keywords" name="keywords" placeholder="user name or id" data-parsley-required="true">
+                <button type="submit"  style="background-color: #f16b00; color: #fffdf5"><i class="fa fa-search m-r-5"></i> search</button>
+        </form>
+    </div>
+   </div>
+</div>
+    <table id="orderTable">
+        <tr>
+            <th class="btgn">User name</th>
+            <th class="btgn">User Address</th>
+            <th class="btgn">Phone Number</th>
+<!--            <th class="btgn">回复</th>-->
+<!--            <th class="btgn">Dishes</th>-->
+<!--            <th class="btgn">修改状态时间</th>-->
+
+
+            <th class="btgn">Total Price</th>
+            <th class="btgn">Order Status</th>
+            <th class="btgn">Operation</th>
+
+        </tr>
+        <tr th:each="orderInfo : ${pageInfo.list}">
+            <td th:text="${orderInfo.userName}"></td>
+            <td th:text="${orderInfo.address}"></td>
+            <td th:text="${orderInfo.phone}"></td>
+<!--            <td th:text="${orderInfo.orderTime}"></td>-->
+<!--            <td>-->
+<!--                <img th:if="${orderInfo.image != null}"-->
+<!--                     th:src="@{/image/{imageName}(imageName=${orderInfo.image})}"-->
+<!--                     width="50"-->
+<!--                     height="50">-->
+<!--            </td>-->
+            <td th:text="${orderInfo.amount}"></td>
+            <td>
+                <span th:switch="${orderInfo.status}">
+                <span th:case="1">Pending Payment</span>
+                <span th:case="2">Waiting for Order Preparation
+                    <form action="/Order/updateStatus" method="GET">
+                        <input type="hidden" name="id" th:value="${orderInfo.id}">
+                        <button type="submit" class="btn btn-secondary">The meal is ready</button>
+                    </form>
+                </span>
+                <span th:case="3">Wait for receiving</span>
+                <span th:case="4">Received</span>
+                <span th:case="5">Evaluated</span>
+                <span th:case="6">Cancelled</span>
+                <span th:case="*">Unknown Status</span>
+                </span>
+            </td>
+
+            <td>
+                <a th:href="@{'/Order/edit/' + ${orderInfo.id}}" class="btn btn-danger">modification</a>
+                <!--                <a th:href="@{'/Order/Cedit?id=' + ${orderInfo.id}}"><input type="submit" value="用户修改订单"></a>-->
+                <a th:href="@{'/Order/detail/' + ${orderInfo.id}}" class="btn btn-danger">detail</a>
+<!--                <a onclick="return confirm('Confirm to delete current data?')" class="btn btn-danger" th:href="@{'/Order/delete/' + ${orderInfo.id}}" >delete</a>-->
+                <a th:if="${orderInfo.status != 5}" onclick="return confirm('Confirm to delete current data?')" class="btn btn-danger" th:href="@{'/Order/delete/' + ${orderInfo.id}}" >delete</a>
+
+            </td>
+
+    </table>
+
+    <div th:if="${pageInfo.pages > 1}" class="pagination">
+            <!-- 上一页 -->
+            <div th:class="${pageInfo.hasPreviousPage} ? '' : 'disabled'">
+                <a th:if="${pageInfo.hasPreviousPage}" th:href="@{'?pageNum=' + ${pageInfo.prePage} + '&pageSize=' + ${pageInfo.pageSize}}">&laquo;</a>
+                <span th:if="${!pageInfo.hasPreviousPage}">&laquo;</span>
+            </div>
+            <!-- 页码 -->
+            <div th:each="pageNumber : ${#numbers.sequence(1, pageInfo.pages)}" th:class="${pageNumber == pageInfo.pageNum} ? 'active' : ''">
+                <a th:href="@{'?pageNum=' + ${pageNumber} + '&pageSize=' + ${pageInfo.pageSize}}" th:text="${pageNumber}"></a>
+            </div>
+            <!-- 下一页 -->
+            <div th:class="${pageInfo.hasNextPage} ? '' : 'disabled'">
+                <a th:if="${pageInfo.hasNextPage}" th:href="@{'?pageNum=' + ${pageInfo.nextPage} + '&pageSize=' + ${pageInfo.pageSize}}">&raquo;</a>
+                <span th:if="${!pageInfo.hasNextPage}">&raquo;</span>
+            </div>
+    </div>
+</div>
+<script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/jquery.js"></script>
+<script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/bootstrap.min.js"></script>
+<script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/jquery.stellar.min.js"></script>
+<script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/jquery.magnific-popup.min.js"></script>
+<script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/smoothscroll.js"></script>
+<script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/custom.js"></script>
+<script type="text/javascript" color="54,54,54" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><!--背景-->
+
+</body>
+
+</html>

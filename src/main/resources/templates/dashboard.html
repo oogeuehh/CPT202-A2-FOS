@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://kit.fontawesome.com/5b19e49b1c.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 300px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            /*background-color: #333;*/
+            background-image: linear-gradient(to right, #FF6347, #FFA500);
+            padding-top: 40px;
+        }
+
+        .sidebar a {
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            color: #fff;
+        }
+
+        .sidebar li:last-child {
+            position: fixed;
+            bottom: 50px;
+            left: 0;
+        }
+
+        .sidebar li:nth-last-child(2) {
+            position: fixed;
+            bottom: 100px;
+            left: 0;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+        }
+        .sidebar h1{
+            color: #f0f0f0;
+            margin-right: 15px;
+            margin-left: 15px;
+            display: flex;
+            align-items: center; /* 垂直居中对齐 */
+
+        }
+
+        .sidebar h1 i {
+            margin-right: 15px;
+        }
+
+        .sidebar li {
+            list-style-type: none;
+            font-size: 18px;
+            height: 50px;
+            width: 300px;
+
+        }
+        .sidebar li a {
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar li a i {
+            margin-right: 15px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="sidebar" th:replace="sidebar :: sidebarContent"></div>
+<!--<div class="sidebar">-->
+<!--    <h1><i class="fa fa-reorder"></i>Dashboard</h1>-->
+<!--        <li><a href="/homepage"><i class="fa fa-home"></i> Home Page</a></li>-->
+<!--        <li><a href="/Order/all"><i class="fas fa-shopping-basket"></i> Order management</a></li>-->
+<!--        <li><a href="/user/customerList"><i class="fa fa-address-card"></i>  Account management</a></li>-->
+<!--        <li><a href="/menu/menuItemList"><i class="fa fa-glass"></i> Menus</a></li>-->
+<!--        <li><a href="/type/typeList"><i class="fa fa-glass"></i> type</a></li>-->
+<!--        <li><a href="/Order/monthlySummary"><i class="fa fa-line-chart"></i>   Income Statement</a></li>-->
+<!--        <li><a href="/login"><i class="fa fa-sign-out"></i>  Logout</a></li>-->
+<!--        <li><a href="#"><i class="fa fa-gear"></i>  Setting</a></li>-->
+<!--</div>-->
+
+<div class="content" style="margin-left: 300px;">
+    <div>
+<!--        <link rel="preload" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/fonts/fontawesome-webfont.woff2" as="font" type="font/woff2" crossorigin=""/>-->
+<!--        <link rel="preload" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/home-bg.jpg" as="image" crossorigin=""/>-->
+        <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/magnific-popup.css"/>
+        <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/font-awesome.min.css"/>
+        <!-- MAIN CSS -->
+        <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/templatemo-style.css"/>
+
+        <section id="about" data-stellar-background-ratio="0.5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-sm-6">
+                        <div class="about-info">
+                            <div class="section-title">
+                                <h2>Let us introduce
+                                </h2>
+                                <span class="line-bar">...</span>
+                            </div>
+                            <p>Welcome to SavorCraft Bistro & Lounge, where culinary excellence meets warm hospitality. Nestled in the heart of [Location], our restaurant offers a delightful fusion of flavors from around the world, crafted with care and creativity by our talented chefs. </p>
+                            <p>Whether you're craving traditional comfort food or adventurous gourmet dishes, our diverse menu has something to satisfy every palate. Relax in our inviting ambiance, unwind with a selection from our extensive wine list, and indulge in a dining experience that's sure to delight your senses. Join us at [Restaurant Name] for an unforgettable culinary journey.
+                            </p>
+                        </div>
+                    </div>
+<!--                    <div class="col-md-3 col-sm-6">-->
+<!--                        <div class="about-info skill-thumb">-->
+<!--                            <strong>Web Design</strong>-->
+<!--                            <span class="pull-right">85%</span>-->
+<!--                            <div class="progress">-->
+<!--                                <div role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" id="i9oai" class="progress-bar progress-bar-primary c2614">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <strong>Photography</strong>-->
+<!--                            <span class="pull-right">90%</span>-->
+<!--                            <div class="progress">-->
+<!--                                <div role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" id="iel1j" class="progress-bar progress-bar-primary c2679">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <strong>Content Marketing</strong>-->
+<!--                            <span class="pull-right">75%</span>-->
+<!--                            <div class="progress">-->
+<!--                                <div role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" id="i5r2d2" class="progress-bar progress-bar-primary c2742">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <strong>CMS Admin</strong>-->
+<!--                            <span class="pull-right">70%</span>-->
+<!--                            <div class="progress">-->
+<!--                                <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" id="icw9nf" class="progress-bar progress-bar-primary c2805">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="col-md-4 col-sm-12">
+                        <div class="about-image">
+                            <img src="https://coscdn.htmlpage.cn/2022/05/20220505154307881.png"/>
+<!--                            <img src="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/about-image.jpg" alt="" class="img-responsive"/>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- BLOG -->
+        <section id="blog" data-stellar-background-ratio="0.5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="section-title">
+                            <h2>Our Blog
+                            </h2>
+                            <span class="line-bar">...</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <!-- BLOG THUMB -->
+                        <div class="media blog-thumb">
+                            <div class="media-object media-left">
+                                <a href="blog-detail.html"><img src="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/blog-image1.jpg" alt="" class="img-responsive"/></a>
+                            </div>
+                            <div class="media-body blog-info">
+                                <small><i class="fa fa-clock-o">
+                                </i> December 22, 2021</small>
+                                <h3>
+                                    <a href="blog-detail.html">How To Find Out Beautiful Workspace.</a>
+                                </h3>
+                                <p>11</p>
+                                <a href="blog-detail.html" class="btn section-btn">Read article</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <!-- BLOG THUMB -->
+                        <div class="media blog-thumb">
+                            <div class="media-object media-left">
+                                <a href="blog-detail.html"><img src="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/blog-image2.jpg" alt="" class="img-responsive"/></a>
+                            </div>
+                            <div class="media-body blog-info">
+                                <small><i class="fa fa-clock-o">
+                                </i> December 18, 2021</small>
+                                <h3>
+                                    <a href="blog-detail.html">woman sportwear.</a>
+                                </h3>
+                                <p>Lorem ipsum dolor sit consectetur adipiscing morbi venenatis.
+                                </p>
+                                <a href="blog-detail.html" class="btn section-btn">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <!-- BLOG THUMB -->
+                        <div class="media blog-thumb">
+                            <div class="media-object media-left">
+                                <a href="blog-detail.html"><img src="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/blog-image3.jpg" alt="" class="img-responsive"/></a>
+                            </div>
+                            <div class="media-body blog-info">
+                                <small><i class="fa fa-clock-o">
+                                </i> December 14, 2021</small>
+                                <h3>
+                                    <a href="blog-detail.html">new creative fashion.</a>
+                                </h3>
+                                <p>Lorem ipsum dolor sit consectetur adipiscing morbi venenatis.
+                                </p>
+                                <a href="blog-detail.html" class="btn section-btn">Read article</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <!-- BLOG THUMB -->
+                        <div class="media blog-thumb">
+                            <div class="media-object media-left">
+                                <a href="blog-detail.html"><img src="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/blog-image4.jpg" alt="" class="img-responsive"/></a>
+                            </div>
+                            <div class="media-body blog-info">
+                                <small><i class="fa fa-clock-o">
+                                </i> December 10, 2021</small>
+                                <h3>
+                                    <a href="blog-detail.html">minimalist design trend in 2018.</a>
+                                </h3>
+                                <p>Lorem ipsum dolor sit consectetur adipiscing morbi venenatis.
+                                </p>
+                                <a href="blog-detail.html" class="btn section-btn">View Detail</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- WORK -->
+        <section id="work" data-stellar-background-ratio="0.5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="section-title">
+                            <h2>Our work
+                            </h2>
+                            <span class="line-bar">...</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <!-- WORK THUMB -->
+                        <div class="work-thumb">
+                            <a href="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/work-image1.jpg" class="image-popup"><img src="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/work-image1.jpg" alt="Work" class="img-responsive"/><div class="work-info">
+                                <h3>Clean &amp; Minimal
+                                </h3>
+                                <small>Product Design</small>
+                            </div></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <!-- WORK THUMB -->
+                        <div class="work-thumb">
+                            <a href="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/work-image2.jpg" class="image-popup"><img src="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/work-image2.jpg" alt="Work" class="img-responsive"/><div class="work-info">
+                                <h3>Studio Bag
+                                </h3>
+                                <small>Branding</small>
+                            </div></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <!-- WORK THUMB -->
+                        <div class="work-thumb">
+                            <a href="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/work-image3.jpg" class="image-popup"><img src="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/work-image3.jpg" alt="Work" class="img-responsive"/><div class="work-info">
+                                <h3>Frame Design
+                                </h3>
+                                <small>Photography</small>
+                            </div></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <!-- WORK THUMB -->
+                        <div class="work-thumb">
+                            <a href="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/work-image4.jpg" class="image-popup"><img src="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/work-image4.jpg" alt="Work" class="img-responsive"/><div class="work-info">
+                                <h3>Paint Work
+                                </h3>
+                                <small>Art, Design</small>
+                            </div></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- CONTACT -->
+        <section id="contact" data-stellar-background-ratio="0.5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="section-title">
+                            <h2>Contact us
+                            </h2>
+                            <span class="line-bar">...</span>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                        <!-- CONTACT FORM HERE -->
+                        <form method="post" id="contact-form" role="form" action="#">
+                            <div class="col-md-6 col-sm-6">
+                                <input type="text" placeholder="Full Name" id="cf-name" name="cf-name" required class="form-control"/>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <input type="email" placeholder="Your Email" id="cf-email" name="cf-email" required class="form-control"/>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <input type="tel" placeholder="Your Phone" id="cf-number" name="cf-number" required class="form-control"/>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <select id="cf-budgets" name="cf-budgets" class="form-control"><option>Budget Level</option><option>$500 to $1,000</option><option>$1,000 to $2,200</option><option>$2,200 to $4,500</option><option>$4,500 to $7,500</option><option>$7,500 to $12,000</option><option>$12,000 or more</option></select>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <textarea rows="6" placeholder="Your requirements" id="cf-message" name="cf-message" required class="form-control"></textarea>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <input type="submit" name="submit" value="Send Message" class="form-control"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="google-map">
+                            <div>
+                                <img src="https://coscdn.htmlpage.cn/2022/05/20220505154307881.png"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- FOOTER -->
+        <footer data-stellar-background-ratio="0.5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-sm-12">
+                        <div class="footer-thumb footer-info">
+                            <h2>Hydro Company
+                            </h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4">
+                        <div class="footer-thumb">
+                            <h2>Company
+                            </h2>
+                            <ul class="footer-link">
+                                <li>
+                                    <a href="#">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="#">Join our team</a>
+                                </li>
+                                <li>
+                                    <a href="#">Read Blog</a>
+                                </li>
+                                <li>
+                                    <a href="#">Press</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4">
+                        <div class="footer-thumb">
+                            <h2>Services
+                            </h2>
+                            <ul class="footer-link">
+                                <li>
+                                    <a href="#">Pricing</a>
+                                </li>
+                                <li>
+                                    <a href="#">Documentation</a>
+                                </li>
+                                <li>
+                                    <a href="#">Support</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4">
+                        <div class="footer-thumb">
+                            <h2>Find us
+                            </h2>
+                            <p>123 Grand Rama IX,
+                                <br/> Krung Thep Maha Nakhon 10400
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="footer-bottom">
+                            <div class="col-md-6 col-sm-5">
+                                <div class="copyright-text">
+                                    <p>Copyright © 2021 Your Company
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-7">
+                                <div class="phone-contact">
+                                    <p>Call us
+                                        <span>(+66) 010-020-0340</span>
+                                    </p>
+                                </div>
+                                <ul class="social-icon">
+                                    <li>
+                                        <a href="#" attr="facebook icon" class="fa fa-facebook-square"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="fa fa-twitter"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="fa fa-instagram"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- MODAL -->
+        <section id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-popup">
+                    <div class="modal-header">
+                        <button type="button" data-dismiss="modal" aria-label="Close" class="close">Send</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="modal-title">
+                                        <h2>Hydro Co
+                                        </h2>
+                                    </div>
+                                    <!-- NAV TABS -->
+                                    <ul role="tablist" class="nav nav-tabs">
+                                        <li class="active">
+                                            <a href="#sign_up" aria-controls="sign_up" role="tab" data-toggle="tab">Create an account</a>
+                                        </li>
+                                        <li>
+                                            <a href="#sign_in" aria-controls="sign_in" role="tab" data-toggle="tab">Sign In</a>
+                                        </li>
+                                    </ul>
+                                    <!-- TAB PANES -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" id="sign_up" class="tab-pane fade in active">
+                                            <form method="post" action="#">
+                                                <input type="text" name="name" placeholder="Name" required class="form-control"/>
+                                                <input type="telephone" name="telephone" placeholder="Telephone" required class="form-control"/>
+                                                <input type="email" name="email" placeholder="Email" required class="form-control"/>
+                                                <input type="password" name="password" placeholder="Password" required class="form-control"/>
+                                                <input type="submit" name="submit" value="Submit Button" class="form-control"/>
+                                            </form>
+                                        </div>
+                                        <div role="tabpanel" id="sign_in" class="tab-pane fade in">
+                                            <form method="post" action="#">
+                                                <input type="email" name="email" placeholder="Email" required class="form-control"/>
+                                                <input type="password" name="password" placeholder="Password" required class="form-control"/>
+                                                <input type="submit" name="submit" value="Submit Button" class="form-control"/>
+                                                <a href="#">Forgot your password?</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- SCRIPTS -->
+        <script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/jquery.js"></script>
+        <script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/bootstrap.min.js"></script>
+        <script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/jquery.stellar.min.js"></script>
+        <script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/jquery.magnific-popup.min.js"></script>
+        <script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/smoothscroll.js"></script>
+        <script src="https://coscdn.htmlpage.cn/html-template/template-company-00002/js/custom.js"></script>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>orderInfo homepage</title>
+    <style type="text/css">
+        table {border-collapse: collapse; font-size: 14px;
+            width: 80%; margin: auto}
+        table, th, td {border: 0px solid darkslategray;padding: 10px}
+        .btgn{
+            font-family: "Microsoft YaHei UI";
+            font-size: 16px;
+            color: #255e95;
+            background-color: #99CCFF;
+            text-align: center;
+        }
+        .ccc{
+            font-family: "Microsoft YaHei UI";
+            font-size: 16px;
+            color: #255e95;
+            background-color: #ff7c76;
+            text-align: center;
+        }
+
+        tr:nth-child(2n){
+            background-color:#FFCC99;
+        }
+        tr:nth-child(2n+1) {
+            background-color: #99CC99;
+        }
+
+        .c{
+            width: 200px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<span class="span"  style="color: darkslategray;text-align: center; font-size: 30px" >新增订单信息</span>
+<div style="margin:122px auto; width:392px">
+<!--    <form action="/Order/addOrder" method="post" class="c" th:object="${orderInfo}">-->
+<!--        &lt;!&ndash; <form action="AddUser" method="get">&ndash;&gt;-->
+<!--        <tr><th class="ccc">用户名称</th> <input required="required" name="username"class="btn"  AUTOCOMPLETE="off" th:value="${username}"/><tr/> <br/>-->
+<!--        <tr><th class="btgn">OrderId:</th> <input required="required"  name="OrderId" class="btn"  AUTOCOMPLETE="off" th:value="${OrderId}"/> </tr><br/>-->
+<!--        <tr><th class="ccc">手机号</th> <input required="required" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')"  name="mobile"class="btn"  AUTOCOMPLETE="off" th:value="${mobile}"/> </tr><br/>-->
+<!--        <tr><th class="ccc">地址</th> <input required="required" name="address"class="btn"  AUTOCOMPLETE="off" th:value="${address}"/><tr/> <br/>-->
+
+<!--        <tr><th class="ccc">金额</th> <input required="required" name="amount"class="btn"  AUTOCOMPLETE="off" th:value="${amount}"/><tr/> <br/>-->
+<!--        <div>-->
+<!--            <label for="time">配送到达时间：</label>-->
+<!--            <input type="datetime-local" id="time" name="time" th:value="${time}" />-->
+<!--        </div>-->
+<!--        <button type="submit" onclick="validate()">提交</button>-->
+<!--    </form>-->
+</div>
+</body>
+<script type="text/javascript" color="54,54,54" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><!--背景-->
+
+</html>
+
+

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">a
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Cart Details</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-image: linear-gradient(to right, #FF6347, #FFA500);
+        }
+
+        .menu-detail {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .button {
+            padding: 8px 16px; /* 按钮内边距，可以根据需要调整 */
+            background-color: #f44336; /* 蓝色背景，类似 Bootstrap 的主题蓝色 */
+            color: white; /* 文字颜色为白色 */
+            border: none; /* 无边框 */
+            cursor: pointer; /* 鼠标悬停时显示指针 */
+            border-radius: 5px; /* 圆角边框 */
+            font-size: 16px; /* 字体大小 */
+            transition: background-color 0.3s; /* 平滑背景颜色变化效果 */
+        }
+        .back-button-container {
+            position: absolute; /* Position it relative to the nearest positioned ancestor */
+            top: 10px; /* Space from the top */
+            left: 10px; /* Space from the right */
+            z-index: 100; /* Make sure it's above other elements */
+        }
+
+    </style>
+</head>
+<body>
+<div class="back-button-container">
+    <a href="/customer/homepage" class="back-button">&lt; Back</a>
+</div>
+<h1>Cart Details</h1>
+<div class="menu-detail">
+<!--<div>-->
+<!--    <p th:text ="${UserId}"></p>-->
+<!--</div>-->
+<form action="/cart/addCartItem" method="post">
+
+
+<!--    <h2>Menu Detail</h2>-->
+<!--    <div class="menu-detail">-->
+    <input type="hidden" name="goodsName" th:value="${menu.name}">
+    <input type="hidden" name="userId" th:value="${UserId}">
+    <input type="hidden" name="goodsId" th:value="${menu.id}">
+    <input type="hidden" name="goodsImg" th:value="${menu.image}">
+
+    <p class="menu-label">Name: </p>
+    <p th:text="${menu.name}"></p>
+
+    <p class="menu-label">Taste: </p>
+    <p th:text="${menu.taste}"></p>
+
+    <div class="menu-image">
+        <img th:src="@{/image/} + ${menu.image}" alt="image" width="150">
+    </div>
+
+    <p class="menu-label">Choose size:</p>
+
+    <input type="radio" id="smallSize" name="size" th:value="${menu.smallPrice}">
+    <label for="smallSize">Small Size : <span th:text="${menu.smallPrice}">Small Price</span></label><br>
+
+    <input type="radio" id="mediumSize" name="size" th:value="${menu.mediumPrice}" checked>
+    <label for="mediumSize">Medium Size : <span th:text="${menu.mediumPrice}">Medium Price</span></label><br>
+
+    <input type="radio" id="largeSize" name="size" th:value="${menu.largePrice}">
+    <label for="largeSize">Large Size : <span th:text="${menu.largePrice}">Large Price</span></label><br>
+
+
+<!--</div>-->
+
+<div th:if="${flavorList != null and flavorList.size() > 0}">
+    <h2>Flavor List</h2>
+    <ul>
+        <th:block th:each="flavor : ${flavorList}">
+            <li th:text="${flavor.flavorName}"></li>
+            <th:block th:if="${flavor.flavorName == 'spiciness'}">
+                <li>
+                    <input type="radio" id="notSpicy" name="spiciness" value="Not Spicy">
+                    <label for="notSpicy">Not Spicy</label>
+                    <input type="radio" id="mildlySpicy" name="spiciness" value="Mildly Spicy">
+                    <label for="mildlySpicy">Mildly Spicy</label>
+                    <input type="radio" id="moderatelySpicy" name="spiciness" value="Moderately Spicy" checked>
+                    <label for="moderatelySpicy">Moderately Spicy</label>
+                    <input type="radio" id="verySpicy" name="spiciness" value="Very Spicy">
+                    <label for="verySpicy">Very Spicy</label>
+                </li>
+            </th:block>
+            <th:block th:if="${flavor.flavorName == 'cilantro'}">
+                <li>
+                    <input type="radio" id="cilantroYes" name="cilantro" value="Yes" checked>
+                    <label for="cilantroYes">Yes</label>
+                    <input type="radio" id="cilantroNo" name="cilantro" value="No">
+                    <label for="cilantroNo">No</label>
+                </li>
+            </th:block>
+            <th:block th:if="${flavor.flavorName == 'greenOnion'}">
+                <li>
+                    <input type="radio" id="greenOnionYes" name="greenOnion" value="Yes" checked>
+                    <label for="greenOnionYes">Yes</label>
+                    <input type="radio" id="greenOnionNo" name="greenOnion" value="No">
+                    <label for="greenOnionNo">No</label>
+                </li>
+            </th:block>
+            <th:block th:if="${flavor.flavorName == 'garlic'}">
+                <li>
+                    <input type="radio" id="garlicYes" name="garlic" value="Yes" checked>
+                    <label for="garlicYes">Yes</label>
+                    <input type="radio" id="garlicNo" name="garlic" value="No">
+                    <label for="garlicNo">No</label>
+                </li>
+            </th:block>
+        </th:block>
+    </ul>
+</div>
+
+
+<button class="button" type="submit">Submit</button>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>Monthly order statistics</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!--    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/bootstrap.min.css"/>-->
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/magnific-popup.css"/>
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/font-awesome.min.css"/>
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/templatemo-style.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/5b19e49b1c.js" crossorigin="anonymous"></script>
+    <style>
+        .sidebar {
+            height: 100%;
+            width: 300px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            /*background-color: #333;*/
+            background-image: linear-gradient(to right, #FF6347, #FFA500);
+            padding-top: 40px;
+        }
+
+        .sidebar a {
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            color: #fff;
+        }
+
+        .sidebar li:last-child {
+            position: fixed;
+            bottom: 50px;
+            left: 0;
+        }
+
+        .sidebar li:nth-last-child(2) {
+            position: fixed;
+            bottom: 100px;
+            left: 0;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+        }
+        .sidebar h1{
+            color: #f0f0f0;
+            margin-right: 15px;
+            margin-left: 15px;
+            display: flex;
+            align-items: center; /* 垂直居中对齐 */
+
+        }
+
+        .sidebar h1 i {
+            margin-right: 15px;
+        }
+
+        .sidebar li {
+            list-style-type: none;
+            font-size: 18px;
+            height: 50px;
+            width: 300px;
+
+        }
+        .sidebar li a {
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar li a i {
+            margin-right: 15px;
+        }
+
+        .content {
+            width: 800px; /* 设置宽度为200像素 */
+            height: 850px;
+            padding: 20px;
+            margin-left: 400px;
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="sidebar" th:replace="sidebar :: sidebarContent"></div>
+
+<!--<div id="sidebar-container"></div>-->
+
+<!--<script>-->
+<!--    window.onload = function() {-->
+<!--        fetch('dashboard.html')-->
+<!--            .then(response => response.text())-->
+<!--            .then(data => {-->
+<!--                document.getElementById('sidebar-container').innerHTML = data;-->
+<!--            });-->
+<!--    };-->
+<!--</script>-->
+
+<div class="content">
+    <h1>Monthly order amount and order quantity statistics</h1>
+    <canvas id="orderChart" width="800" height="400"></canvas>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        $(document).ready(function() {
+        $.ajax({
+            url: '/list/Summary',
+            type: 'GET',
+            success: function(data) {
+                var totalAmounts = data.map(function(item) {
+                    return item["totalAmount"];
+                });
+                var months = data.map(function(item) {
+                    return item["month"];
+                });
+
+                var orderCounts = data.map(function(item) {
+                    return item["orderCount"];
+                });
+                var ctx = document.getElementById('orderChart').getContext('2d');
+                var orderChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: months,
+                        datasets: [{
+                            label: 'Order sum',
+                            data: totalAmounts,
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        },
+                            {
+                                label: 'order quantity',
+                                data: orderCounts,
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1
+                            }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            },
+            error: function() {
+                console.log('Failed to fetch data');
+            }
+        });})
+
+    </script>
+</div>
+<script type="text/javascript" color="54,54,54" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><!--背景-->
+
+</body>
+
+</html>

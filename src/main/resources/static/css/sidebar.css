@@ -1,0 +1,66 @@
+
+
+.sidebar {
+    width: 300px; /* 统一设置侧边栏宽度为200px */
+    height: 100%;
+    font-family: Arial, sans-serif; /* 设置字体样式 */
+    font-size: 16px; /* 设置字体大小 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #FF6347, #FFA500);
+    padding-top: 40px;
+}
+
+.sidebar a {
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    color: #fff;
+    font-size: 16px; /* 统一设置链接字体大小 */
+}
+
+.sidebar li:last-child {
+    position: fixed;
+    bottom: 50px;
+    left: 0;
+}
+
+.sidebar li:nth-last-child(2) {
+    position: fixed;
+    bottom: 100px;
+    left: 0;
+}
+
+.sidebar a:hover {
+    background-color: #555;
+}
+
+.sidebar h1 {
+    color: #f0f0f0;
+    margin-right: 15px;
+    margin-left: 15px;
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+    font-size: 18px; /* 统一设置标题字体大小 */
+}
+
+.sidebar h1 i {
+    margin-right: 15px;
+}
+
+.sidebar li {
+    list-style-type: none;
+    font-size: 16px; /* 统一设置列表项字体大小 */
+    height: 50px;
+    width: 200px; /* 统一设置列表项宽度为200px */
+}
+
+.sidebar li a {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar li a i {
+    margin-right: 15px;
+}

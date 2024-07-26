@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑用户信息</title>
+</head>
+<body>
+
+<div class="container">
+    <h2>编辑用户信息</h2>
+    <form action="/user/saveProfile" method="post" id="editForm" th:value="user">
+        <input required="required" hidden name="id" class="btn" AUTOCOMPLETE="off" th:value="${user.id}"/><br/>
+<!--        <label for="username">用户名：</label>-->
+        <label>用户名：</label>
+        <input required="required" name="username" class="btn" AUTOCOMPLETE="off" th:value="${user.username}"/><br/>
+        <label>邮箱：</label>
+        <input required="required" name="email" class="btn" AUTOCOMPLETE="off" th:value="${user.email}"/><br/>
+        <label>电话：</label>
+        <input required="required" name="phone" class="btn" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" AUTOCOMPLETE="off" th:value="${user.phone}"/><br/>
+        <button type="submit">保存</button>
+    </form>
+</div>
+
+</body>
+</html>

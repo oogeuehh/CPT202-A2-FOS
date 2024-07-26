@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update MenuItem</title>
+    <!--    <link href="/css/update_new.css" rel="stylesheet">-->
+    <style>
+        body {
+            background-color: lavender;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-image: linear-gradient(to right, #FF6347, #FFA500);
+
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input[type=text] {
+            width: 100%;
+            padding: 8px 16px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            box-shadow: inset 1px 1px 3px #aaa;
+            border-radius: 10px;
+        }
+
+        button {
+            border-color: black;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .menu-detail {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .back-button-container {
+            position: absolute; /* Position it relative to the nearest positioned ancestor */
+            top: 10px; /* Space from the top */
+            left: 10px; /* Space from the right */
+            z-index: 100; /* Make sure it's above other elements */
+            padding: 8px 16px; /* 按钮内边距，可以根据需要调整 */
+            background-color: #ffffff;
+            color: #f16b00; /* 文字颜色为白色 */
+            border: none; /* 无边框 */
+            cursor: pointer; /* 鼠标悬停时显示指针 */
+            border-radius: 5px; /* 圆角边框 */
+            font-size: 16px; /* 字体大小 */
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="back-button-container">
+    <a class="back-button">&lt; Back</a>
+</div>
+<h1>Update MenuItem</h1>
+<div class="menu-detail">
+    <div>
+        <form action="/menu/updateMenu" method="post" th:value="menu">
+            <input type="text" hidden name="id" th:value="${menu?.id}" readonly="readonly" ><br>
+            Name:<input required="required" type="text" th:value="${menu.name}" name="name"><br>
+            Taste:<input required="required" type="text" th:value="${menu?.taste}" name="taste"><br>
+
+            SmallPrice:<input required="required" type="text" th:value="${menu?.smallPrice}" name="smallPrice"><br>
+            MediumPrice:<input required="required" type="text" th:value="${menu?.mediumPrice}" name="mediumPrice"><br>
+            LargePrice:<input required="required" type="text" th:value="${menu?.largePrice}" name="largePrice"><br>
+            Descr:<input required="required" type="text" th:value="${menu?.descr}" name="descr"><br>
+            <!--        Type:<input type="text" th:value="${menu?.type}" name="type"><br>-->
+            Stock:<input required="required" type="text" th:value="${menu?.stock}" name="stock"><br>
+            <!--        Avatar:<input type="text" th:value="${menu?.avatar}" name="avatar"><br>-->
+            Status:<input required="required" type="text" th:value="${menu?.isLoaded}" name="isLoaded"><br>
+            Type:
+            <select name="type" required="required">
+                <option th:each="types : ${types}" th:value="${types.id}" th:text="${types.descr}"
+                        th:selected="${types.id} == ${menu.type}"></option>
+            </select><br><br>
+            <button type="submit">SUBMIT</button>
+            <button type="submit">SUBMIT</button>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" color="54,54,54" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><!--背景-->
+
+</body>
+</html>

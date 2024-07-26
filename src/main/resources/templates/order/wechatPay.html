@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>wechatpay</title>
+
+</head>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .parent {
+        display: grid;
+        grid-template-columns: repeat(11, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        grid-column-gap: 2px;
+        grid-row-gap:2px;
+        background-image: linear-gradient(to right, #FF6347, #FFA500);
+        width: 100%;
+        height: 100%;
+    }
+
+    .div1 { grid-area: 2 / 3 / 10 / 10;
+        background: rgba( 255, 255, 255, 0.75 );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 13.5px );
+        -webkit-backdrop-filter: blur( 13.5px );
+        border-radius: 10px;
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
+        z-index: 1;
+    }
+
+    .div2 { grid-area: 2 / 4 / 3 / 9;
+        z-index: 2;}
+    .div3 { grid-area: 3 / 4 / 8 / 9;
+        z-index: 2;
+        background: rgba( 255, 255, 255, 1 );
+        border-radius: 5px; /* 圆角边框 */
+        overflow-y: auto;
+    }
+    .div4 { grid-area: 8 / 4 / 9 / 9;
+        z-index: 2;}
+    .div5 { grid-area: 5 / 4 / 8 / 9;
+        z-index: 3;
+        overflow-y: auto;
+    }
+
+    .media-image img {
+        width: 100px; /* 设置图片宽度 */
+        height: auto; /* 设置图片高度自动 */
+    }
+
+
+    .back-button-container {
+        position: absolute; /* Position it relative to the nearest positioned ancestor */
+        top: 10px; /* Space from the top */
+        left: 10px; /* Space from the right */
+        z-index: 100; /* Make sure it's above other elements */
+    }
+
+    .back-button {
+        padding: 8px 12px;
+        background-color: #f44336; /* Adjust color as needed */
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .back-button:hover {
+        background-color: #d32f2f; /* Darker shade for hover */
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type="radio"] {
+        margin-right: 5px;
+    }
+
+    button[type="submit"] {
+        background-color: #f16b00;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #f16b00;
+    }
+
+    .error-message {
+        color: red;
+        margin-top: 5px;
+    }
+
+    .payment-method-img {
+        width: 100px; /* 设置图片宽度 */
+        height: auto; /* 让高度自动调整 */
+        margin-right: 5px; /* 可选：增加右边距 */
+    }
+
+
+</style>
+<body>
+
+
+<div class="parent">
+    <div class="div1">
+        <div class="back-button-container">
+            <a href="/customer/CheckedOrder" class="back-button">&lt; Back</a>
+        </div>
+    </div>
+    <div class="div2"  style="margin-left:10px; color: #2c0808;text-decoration: none; font-weight: bold; font-size: 20px;">
+        <p>Wechat Pay</p>
+    </div>
+
+    <div class="div3">
+        <img src="/image/wechat.png" alt="Image 1">
+        <img src="/image/pay.png" alt="Image 2">
+    </div>
+    <div class="div4">
+        <form action="/customer/finishPay" method="post" th:value="orderInfo">
+            <input required="required" hidden name="id" class="btn" AUTOCOMPLETE="off" th:value="${orderInfo.id}"/><br/>
+
+            <button type="submit">pay</button>
+        </form>
+    </div>
+
+</div>
+<script type="text/javascript" color="54,54,54" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><!--背景-->
+
+</body>
+</html>

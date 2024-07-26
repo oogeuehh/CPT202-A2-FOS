@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon"  type="images/x-icon"  href="images/LOGO.png">
+    <title>registration page</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        html{
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #FF6347, #FFA500);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            -moz-background-size: 100% 100%;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+
+        }
+        input{
+            text-align: center;
+            border:none;
+            background-color: rgba(239, 248, 250, 0.1);
+            border-bottom:1px solid #FF6347;
+            width: 260px;
+        }
+
+        p{
+            text-align: center;
+            color: rgb(116, 114, 114);
+        }
+        .R_register{
+            margin-top: 40px;
+            width: 600px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 600px;
+            border-radius: 15px;
+            background-color: rgba(250, 250, 250);
+            /*box-shadow: 7px 7px 17px rgba(246, 250, 250);*/
+        }
+
+        /*.R_login{*/
+        /*    margin-top: 30px;*/
+        /*    width: 300px;*/
+        /*    justify-content: center;*/
+        /*    align-items: center;*/
+        /*    height: 590px;*/
+        /*    background-color: rgba(167, 150, 150,0.6);*/
+        /*    box-shadow: 7px 7px 17px rgba(52, 56, 66, 0.3);*/
+        /*}*/
+        .rg_right{
+            /*float: right;*/
+            /*margin: 15px;*/
+            /*padding-left: 50px;*/
+        }
+        .msg {
+                text-align: center;
+                line-height: 60px;
+        }
+        a {
+            text-decoration-line: none;
+            color: #FF4500;
+        }
+
+
+        #R_registerbtn {
+            border-color: cornsilk;
+            background-color: #FF6347;
+            color: aliceblue;
+            border-style: hidden;
+            border-radius: 15px;
+            width: 190px;
+            height: 31px;
+            font-size: 16px;
+        }
+
+        #R_loginbtn{
+            border: 20px solid white;
+            background-color: #FF6347;
+            border-radius: 50%;
+            color: aliceblue;
+            border-style: hidden;
+            border-radius: 15px;
+            width: 100px;
+            height: 31px;
+            font-size: 16px;
+
+        }
+        .title{
+            color: white;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<div class="R_register">
+    <h3 style="color: #000000;">Sign Up </h3>
+
+    <form id="registerForm" method="POST" action="/register">
+        <p>Mailbox</p>
+        <p><input type="text" id="R_email" name="email"></p>
+        <span id="erre"></span>
+        <p>User name</p>
+        <p><input type="text" id="username" name="username"></p>
+        <span id="err"></span>
+        <p>Password</p>
+        <p><input type="password" placeholder="at least six digits and letters" id="R_pwd" name="password"></p>
+        <p>Confirm password</p>
+        <p><input type="password" placeholder="The two passwords must be the same" id="R_repwd" onkeyup="checkpassword()"></p>
+        <span id="tishi"></span>
+        <p><button type="button" id="R_registerbtn" onclick="jump()">Register</button></p>
+    </form>
+    <div class="msg">
+        Already have an account?
+        <a href="/login">Sign in</a>
+    </div>
+</div>
+
+
+
+<script>
+
+    var isUsernameAvailable = false;
+    var isEmailAvailable = false;
+    $(function () {
+        $("#username").blur(function () {
+            var name = $("#username").val();
+            $.post("/checkUsernameAvailability", {tel_num: name}, function (data) {
+                if (data) {
+                    $("#err").html("The user name has been registered");
+                    $("#btn").attr('disabled', true);
+                    isUsernameAvailable = false;
+                } else {
+                    $("#err").html("User name available");
+                    $("#btn").attr('disabled', false);
+                    isUsernameAvailable = true; // 用户名可用
+                }
+            });
+        });
+    })
+
+    $(function () {
+        $("#R_email").blur(function () {
+            var email = $("#R_email").val();
+            $.post("/checkEmailAvailability", {tel_email: email}, function (data) {
+                if (data) {
+                    $("#erre").html("The email has been registered");
+                    $("#btne").attr('email_disabled', true);
+                    isEmailAvailable = false; // 邮箱不可用
+                } else {
+                    $("#erre").html("email available");
+                    $("#btne").attr('email_disabled', false);
+                    isEmailAvailable = true; // 邮箱可用
+                }
+            });
+        });
+    })
+
+
+
+    R_email.onchange = function(){
+        var R_email = this.value;
+        // var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+        var reg = /.+@.+/;
+
+        if(!reg.test(R_email)){
+            alert("Email format is incorrect, please re-enter!");
+            return false;
+        }
+    }
+
+    username.onchange = function(){
+        var  username= this.value;
+        var reg = /^\S{1,20}$/;
+        if(!reg.test( username)){
+            alert("The user name contains a maximum of 20 characters");
+            return false;
+        }
+    }
+
+    R_pwd.onchange = function(){
+        var R_pwd = this.value;
+        var reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}$/;
+        if(!reg.test(R_pwd)){
+            alert("Password length must be greater than 6 characters, consists of numbers and letters, please re-enter!");
+            return false;
+        }
+    }
+
+    function checkpassword() {
+        var password = document.getElementById("R_pwd").value;
+        var repassword = document.getElementById("R_repwd").value;
+        if(password == repassword) {
+            document.getElementById("tishi").innerHTML="<font color='green'>The two passwords are the same</font>";
+        }else {
+            document.getElementById("tishi").innerHTML="<font color='red'>Two password inconsistencies!</font>";
+        }
+    }
+
+    function jump() {
+        var Email = document.getElementById("R_email");
+        var User = document.getElementById("username");
+        var Password = document.getElementById("R_pwd");
+        var Repassword = document.getElementById("R_repwd");
+
+        if (!isUsernameAvailable || !isEmailAvailable) {
+            alert("Please enter a valid username and email");
+            return false;
+        }
+
+
+        if (Email.value === "" || User.value === "" || Password.value === "") {
+            alert("Your email, username, or password cannot be empty!");
+            return false;
+        }
+
+        if (User.value.includes("admin")) {
+            alert("Please enter a valid username");
+            return false;
+        }
+
+        // 检查两次输入的密码是否一致
+        if (Password.value !== Repassword.value) {
+            alert("The two passwords do not match!");
+            return false;
+        }
+
+        // 如果所有条件都满足，则提交表单
+        document.getElementById("registerForm").submit();
+    }
+    function jump3(){
+        window.location.href="login.html";
+    }
+</script>
+</body>
+</html>

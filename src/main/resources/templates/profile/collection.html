@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Collection</title>
+    <style>
+        /* 添加一些简单的样式以美化页面 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .menu-detail {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: #f9f9f9;
+        }
+        .menu-image {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .menu-image img {
+            max-width: 100%;
+            height: auto;
+        }
+        .menu-label {
+            font-weight: bold;
+        }
+        .add-btn {
+            width: 10%;
+            height: 30px;
+            border-radius: 10px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .btn-form{
+            width: 100%;
+        }
+
+        .btn-content{
+            border-radius: 10px;
+            width: 100%;
+            height: 40px;
+            color:white;
+            background-color: midnightblue;
+        }
+    </style>
+</head>
+<body>
+<h1>Menu Detail</h1>
+<div class="menu-detail">
+    <div class="menu-image">
+        <img th:src="@{/image/} + ${menu.image}" alt="头像" width="150">
+    </div>
+    <!--    <div class="card-img" th:style="'background-image:url(' + @{'/image/' + ${menu.image}} + ')'"></div>-->
+    <div>
+        <p class="menu-label">Name: </p>
+        <p th:text="${menu.name}"></p>
+
+        <p class="menu-label">Type: </p>
+        <p th:text="${menu.type}"></p>
+
+        <p class="menu-label">Taste: </p>
+        <p th:text="${menu.taste}"></p>
+
+        <p class="menu-label">Size: </p>
+        <p th:text="${menu.size}"></p>
+
+        <p class="menu-label">Price: </p>
+        <p th:text="${menu.price}"></p>
+
+        <p class="menu-label">Description: </p>
+        <p th:text="${menu.descr}"></p>
+
+        <p class="menu-label">Stock: </p>
+        <p th:text="${menu.stock}"></p>
+
+        <a th:href="@{'' + ${menu.id}}" class="btn btn-primary">favorite</a>
+        <a th:href="@{'' + ${menu.id}}" class="btn btn-primary">add to cart</a>
+    </div>
+</div>
+<script type="text/javascript" color="54,54,54" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><!--背景-->
+
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Detail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <style>
+        /* 添加一些简单的样式以美化页面 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-image: linear-gradient(to right, #FF6347, #FFA500);
+        }
+        /*ul {*/
+        /*    text-decoration: none;*/
+        /*    list-style: none;*/
+        /*}*/
+        /*ul > li {*/
+        /*    display: inline-block;*/
+        /*    font-size: 20px;*/
+        /*}*/
+        /*ul > li:hover {*/
+        /*    cursor: pointer;*/
+        /*}*/
+
+        /*.rank-rated {*/
+        /*    color: #f6be00;*/
+        /*}*/
+        /*.rank-not-rated {*/
+        /*    color: #eee;*/
+        /*}*/
+        /*.rank-half-rated {*/
+        /*    background: linear-gradient(to right, #f6be00 50%, #eee 50%);*/
+        /*    background-clip: text;*/
+        /*    -webkit-background-clip: text;*/
+        /*    -webkit-text-fill-color: transparent;*/
+        /*}*/
+
+        #orderTable thead, #orderTable tr {
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: blanchedalmond;
+        }
+        #orderTable {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: blanchedalmond;
+            width: 100%;
+        }
+
+        /* Padding and font style */
+        #orderTable td, #orderTable th {
+            padding: 5px 10px;
+            font-size: 15px;
+            font-family: Verdana;
+            color: black;
+        }
+
+        /* Alternating background colors */
+        #orderTable tr:nth-child(even) {
+            background: #FFCC99;
+        }
+        #orderTable tr:nth-child(odd) {
+            background: #FFF
+        }
+
+        h1 {
+            text-align: center;
+        }
+        .menu-detail {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .menu-image {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .menu-image img {
+            max-width: 100%;
+            height: auto;
+        }
+        .menu-label {
+            font-weight: bold;
+        }
+        .add-btn {
+            width: 10%;
+            height: 30px;
+            border-radius: 10px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .btn-form{
+            width: 100%;
+        }
+
+        /*.btn-content{*/
+        /*    border-radius: 10px;*/
+        /*    width: 100%;*/
+        /*    height: 40px;*/
+        /*    color:white;*/
+        /*    background-color: midnightblue;*/
+        /*}*/
+
+        /*   table {border-collapse: collapse; font-size: 14px;*/
+        /*     width: 80%; margin: auto}*/
+        /*table, th, td {border: 0px solid darkslategray;padding: 10px}*/
+        /*.btgn{*/
+        /*    font-family: "Microsoft YaHei UI";*/
+        /*    font-size: 16px;*/
+        /*    color: #255e95;*/
+        /*    background-color: #99CCFF;*/
+        /*    text-align: center;*/
+        /*}*/
+
+        /*tr:nth-child(2n){*/
+        /*    background-color: #fffdf5;*/
+        /*}*/
+        /*tr:nth-child(2n+1) {*/
+        /*    background-color: #f2fbfb;*/
+        /*}*/
+        .button {
+            padding: 8px 16px; /* 按钮内边距，可以根据需要调整 */
+            background-color: #f44336; /* 蓝色背景，类似 Bootstrap 的主题蓝色 */
+            color: white; /* 文字颜色为白色 */
+            border: none; /* 无边框 */
+            cursor: pointer; /* 鼠标悬停时显示指针 */
+            border-radius: 5px; /* 圆角边框 */
+            font-size: 16px; /* 字体大小 */
+            transition: background-color 0.3s; /* 平滑背景颜色变化效果 */
+        }
+        form .btn button:hover{
+            background: #1b1b1b;
+        }
+        .back-button-container {
+            position: absolute; /* Position it relative to the nearest positioned ancestor */
+            top: 10px; /* Space from the top */
+            left: 10px; /* Space from the right */
+            z-index: 100; /* Make sure it's above other elements */
+            padding: 8px 16px; /* 按钮内边距，可以根据需要调整 */
+            background-color: #ffffff;
+            color: #f16b00; /* 文字颜色为白色 */
+            border: none; /* 无边框 */
+            cursor: pointer; /* 鼠标悬停时显示指针 */
+            border-radius: 5px; /* 圆角边框 */
+            font-size: 16px; /* 字体大小 */
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<div class="back-button-container">
+    <a href="/customer/allPastOrder" class="back-button">&lt; Back</a>
+</div>
+<h1>Menu Detail</h1>
+<div class="menu-detail">
+
+    <div>
+        <p class="menu-label">Order id: </p>
+        <p th:text="${orderInfo.id}"></p>
+
+        <p class="menu-label">user id: </p>
+        <p th:text="${orderInfo.userId}"></p>
+
+        <p class="menu-label">user name: </p>
+        <p th:text="${orderInfo.userName}"></p>
+
+        <p class="menu-label">consignee: </p>
+        <p th:text="${orderInfo.consignee}"></p>
+
+        <p class="menu-label">order Time: </p>
+        <p th:text="${orderInfo.orderTime}"></p>
+
+        <p class="menu-label">checkout Time: </p>
+        <p th:text="${orderInfo.checkoutTime}"></p>
+
+        <p class="menu-label">payMethod: </p>
+        <p th:text="${orderInfo.payMethod}"></p>
+
+        <table id="orderTable">
+            <tr>
+                <th class="btgn">food name</th>
+                <th class="btgn">dish Flavor</th>
+                <th class="btgn">number</th>
+                <th class="btgn">price</th>
+                <!--        <th class="btgn">operation</th>-->
+
+            </tr>
+            <tr th:each="orderDetail: ${orderDetails}">
+                <td th:text="${orderDetail.foodName}"></td>
+                <td th:text="${orderDetail.dishFlavor}"></td>
+                <td th:text="${orderDetail.number}"></td>
+                <td th:text="${orderDetail.amount}"></td>
+            </tr>
+            <tr>
+                <td colspan="4">total price: </td>
+                <td>
+                    <span th:text="${orderInfo.amount}"></span>
+                </td>
+            </tr>
+        </table>
+        <p class="menu-label">remark: </p>
+        <p th:text="${orderInfo.remark}"></p>
+        <p class="menu-label">Order status: </p>
+        <span th:switch="${orderInfo.status}">
+            <span th:case="1">Pending Payment</span>
+            <span th:case="2">Waiting for Order Preparation</span>
+            <span th:case="3">Wait for receiving
+                <form action="/customer/received" method="GET">
+                        <input type="hidden" name="id" th:value="${orderInfo.id}">
+                        <button class="button" type="submit">recevied</button>
+                </form>
+            </span>
+            <span th:case="4">Received
+<div class="rating-widget">
+    <form action="/customer/mark" method="POST">
+        <input type="hidden" name="id" th:value="${orderInfo.id}">
+        <div class="rating-select">
+            <label for="rating">Rating:</label>
+            <select id="rating" name="rating">
+                <option value="1">1 </option>
+                <option value="2">2 </option>
+                <option value="3">3 </option>
+                <option value="4">4 </option>
+                <option value="5">5 </option>
+            </select>
+        </div>
+
+        <div class="comment-section">
+            <textarea name="comment" cols="30" placeholder="Leave your comment..."></textarea>
+        </div>
+        <button class="button" type="submit">Submit</button>
+    </form>
+</div>
+            </span>
+            <span th:case="5">Evaluated</span>
+            <span th:case="6">Cancelled</span>
+            <span th:case="*">Unknown Status</span>
+        </span>
+        </p>
+    </div>
+
+</div>
+<script type="text/javascript" color="54,54,54" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><!--背景-->
+
+</body>
+
+
+</html>

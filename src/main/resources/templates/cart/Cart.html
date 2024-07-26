@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/5b19e49b1c.js" crossorigin="anonymous"></script>
+</head>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .parent {
+        display: grid;
+        grid-template-columns: repeat(11, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        grid-column-gap: 2px;
+        grid-row-gap:2px;
+            background-image: linear-gradient(to right, #FF6347, #FFA500);
+            width: 100%;
+            height: 100%;
+    }
+
+    .div1 { grid-area: 2 / 3 / 10 / 10;
+            background: rgba( 255, 255, 255, 0.75 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 13.5px );
+            -webkit-backdrop-filter: blur( 13.5px );
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+            z-index: 1;
+    }
+
+    .div2 { grid-area: 2 / 4 / 3 / 9;
+        z-index: 2;}
+    .div3 { grid-area: 3 / 4 / 8 / 9;
+        z-index: 2;
+        background: rgba( 255, 255, 255, 1 );
+        overflow-y: auto;
+    }
+    .div4 { grid-area: 8 / 4 / 9 / 9;
+        z-index: 2;}
+
+    .card {
+        display: flex;
+        margin-bottom: 10px; /* 为每张卡片添加底部间隙 */
+        padding: 10px;
+        border: 1px solid #ccc; /* 轻微的边框 */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 添加阴影效果 */
+    }
+
+    .media {
+        /*display: flex;*/
+        /*align-items: center; !* 垂直居中 *!*/
+        /*justify-content: space-between; !* 将内容和按钮分布到两端 *!*/
+        display: grid;
+        grid-template-columns: auto 1fr auto; /* 设置三列布局，第一列为自动宽度，第二列填充剩余空间，第三列为自动宽度 */
+        align-items: center; /* 垂直居中 */
+    }
+
+    .media-image {
+        flex: 0 0 auto; /* 不让图片区域伸缩 */
+        margin-right: 20px; /* 图片和文本内容之间的间距 */
+    }
+
+    .media-image img {
+        width: 100px; /* 设置图片宽度 */
+        height: auto; /* 设置图片高度自动 */
+    }
+
+    .media-content {
+        /*flex: 1; !* 让文本内容区域填充剩余空间 *!*/
+        grid-column: 2 / span 1; /* 将文本内容区域放置在第二列 */
+    }
+
+    .card-title {
+        margin-top: 0;
+        color: #333; /* 标题颜色 */
+        font-size: 16px; /* 标题字号 */
+    }
+
+    .card-text {
+        margin: 5px 0;
+        color: #666; /* 文本颜色 */
+        font-size: 14px; /* 文本字号 */
+    }
+
+    .delete-button {
+
+        padding: 5px 10px; /* 添加一些内边距使按钮看起来更好 */
+        background-color: #fff; /* 背景颜色 */
+        color: #f44336; /* 文字颜色 */
+        border: none; /* 去掉边框 */
+        cursor: pointer; /* 鼠标悬停时显示指针 */
+        border-radius: 5px; /* 圆角边框 */
+        /*margin-left: auto;*/
+        justify-self: end;
+        text-decoration: none; /* 去除下划线 */
+    }
+
+    .delete-button:hover {
+        background-color: #d32f2f; /* 鼠标悬停时的背景颜色变化 */
+        color:#fffdf5;
+    }
+
+    .form-container {
+        display: flex;
+        justify-content: space-around; /* 分布按钮 */
+        padding: 10px; /* 增加一些内边距 */
+    }
+
+    .form-button {
+        padding: 8px 16px; /* 按钮内边距，可以根据需要调整 */
+        background-color: #f44336; /* 蓝色背景，类似 Bootstrap 的主题蓝色 */
+        color: white; /* 文字颜色为白色 */
+        border: none; /* 无边框 */
+        cursor: pointer; /* 鼠标悬停时显示指针 */
+        border-radius: 5px; /* 圆角边框 */
+        font-size: 16px; /* 字体大小 */
+        transition: background-color 0.3s; /* 平滑背景颜色变化效果 */
+    }
+
+    .form-button:hover {
+        background-color: #d32f2f; /* 按钮悬停时的背景颜色变化 */
+    }
+    .back-button-container {
+        position: absolute; /* Position it relative to the nearest positioned ancestor */
+        top: 10px; /* Space from the top */
+        left: 10px; /* Space from the right */
+        z-index: 100; /* Make sure it's above other elements */
+    }
+
+    .back-button {
+        padding: 8px 12px;
+        background-color: #f44336; /* Adjust color as needed */
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .back-button:hover {
+        background-color: #d32f2f; /* Darker shade for hover */
+    }
+    /*****************************************************************/
+    .navigation {
+
+        background-color: #f8f9fa; /* 导航栏背景颜色 */
+        padding: 20px 0; /* 上下内边距 */
+        border-bottom: 1px solid #ddd; /* 底部边框 */
+    }
+
+    .navigation ul {
+        list-style-type: none; /* 去除列表项的默认样式 */
+        margin: 0; /* 去除外边距 */
+        padding: 0; /* 去除内边距 */
+    }
+
+    .navigation li {
+        display: inline-block; /* 列表项水平排列 */
+        margin-right: 20px; /* 右侧间距 */
+    }
+
+    .navigation li:last-child {
+        margin-right: 0; /* 最后一个列表项去除右侧间距 */
+    }
+
+    .navigation a {
+        color: #2c0808; /* 链接文字颜色 */
+        text-decoration: none; /* 去除下划线 */
+        font-weight: bold; /* 文字加粗 */
+        font-size: 20px;
+    }
+
+    .navigation a:hover {
+        color: #dc3545; /* 鼠标悬停时链接文字颜色 */
+    }
+
+    .section-btn a.small-btn i.fa {
+        font-size: 20px; /* 设置图标的字体大小 */
+    }
+
+
+
+</style>
+
+<body>
+<section class = "navigation">
+    <link rel="preload" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/fonts/fontawesome-webfont.woff2" as="font" type="font/woff2" crossorigin=""/>
+    <!--        <link rel="preload" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/home-bg.jpg" as="image" crossorigin=""/>-->
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/magnific-popup.css"/>
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/font-awesome.min.css"/>
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/templatemo-style.css"/>
+    <div class="container">
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-nav-first">
+                <li>
+                    <a href="/customer/homepage" >Homepage</a>
+                </li>
+                <li>
+                    <a href="/customer/CustomMenu" >Menu</a>
+                </li>
+
+                <li>
+                    <a href="/cart/viewCart" >Cart</a>
+                </li>
+
+                <li>
+                    <a href="/customer/allPastOrder" >Orders</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#"><i class="fa fa-bookmark"></i></a>
+                </li>
+                <li>
+                    <a href="/user/profile"><i class ="fa fa-user-circle"></i>Profile</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<div class="parent">
+    <div class="div1">
+        <div class="back-button-container">
+            <a href="/customer/CustomMenu" class="back-button">&lt; Back</a>
+        </div>
+    </div>
+
+    <div class="div2"  style="margin-left:10px; color: #2c0808;text-decoration: none; font-weight: bold; font-size: 20px;">
+        <p>Shopping cart</p>
+    </div>
+    <div class="div3">
+        <div th:if="${#lists.isEmpty(cartList)}">
+            <p>Shopping cart is empty.</p>
+        </div>
+
+
+        <div th:each="menu : ${cartList}" class="card">
+            <div class="media">
+                <a href="@{'/menu/detail/' + ${menu.goodsId}}" class="media-image">
+                    <img th:src="@{'/image/' + ${menu.goodsImg}}" alt="" class="img-responsive"/>
+                </a>
+                <div class="media-content">
+                    <h5 class="card-title" th:text="${menu.goodsName}"></h5>
+                    <p class="card-text" th:text="'Price: ' + ${menu.goodsPrice}"></p>
+                    <p class="card-text" th:text="'Customized: ' + ${menu.dishFlavor}"></p>
+                    <div>
+                        <a style=" text-decoration: none; /* 去除下划线 */" th:href="@{'/cart/changeNumberSub/' + ${menu.id}}" class="delete-button">-</a>
+                        <span th:text="'Number: ' + ${menu.num}"></span>
+                        <a style=" text-decoration: none; /* 去除下划线 */" th:href="@{'/cart/changeNumberAdd/' + ${menu.id}}" class="delete-button">+</a>
+                    </div>
+                </div>
+
+                    <a th:href="@{'/cart/deletedCartItem/' + ${menu.id}}" class="delete-button">Delete</a>
+
+
+            </div>
+        </div>
+
+    </div>
+    <div class="div4">
+        <p>total: </p>
+        <p th:text="${Price}"></p>
+
+        <div class="form-container" th:if="${not #lists.isEmpty(cartList)}">
+            <form action="/cart/cleanCart" method="post">
+                <button type="submit" class="form-button">Clear Cart</button>
+            </form>
+            <form action="/customer/CheckedOrder">
+                <button type="submit" class="form-button">Submit Cart</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" color="54,54,54" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><!--背景-->
+
+</body>
+
+
+</html>

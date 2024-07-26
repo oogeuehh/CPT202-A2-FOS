@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .row {
+        column-count: 3; /* 将每行分成两列 */
+        column-gap: 20px; /* 列之间的间距 */
+    }
+
+    .card {
+        break-inside: avoid; /* 避免卡片被分割 */
+        margin-bottom: 20px; /* 设置卡片之间的垂直间距 */
+        width: 100%; /* 确保卡片宽度占满父容器 */
+
+    }
+
+    .card-img {
+        width: 100%; /* 确保背景图片占满卡片 */
+        height: 200px; /* 设置背景图片高度 */
+        background-size: cover; /* 背景图片填充卡片 */
+        background-position: center; /* 居中显示背景图片 */
+    }
+
+    .card-body {
+        padding: 20px; /* 设置卡片内容的内边距 */
+    }
+
+    .card-title {
+        margin-top: 0; /* 去除标题的顶部间距 */
+    }
+</style>
+<body>
+
+<div class="row">
+    <div th:if="${#lists.isEmpty(cartList)}">
+        <p>Shopping cart is empty.</p>
+    </div>
+    <div th:each="menu : ${cartList}" class="col-md-4 mb-4">
+        <div class="card">
+            <a th:href="@{'/menu/detail/' + ${menu.goodsId}}">
+                <div class="card-img" th:style="'background-image:url(' + @{'/image/' + ${menu.goodsImg}} + ')'"></div>
+                <div class="card-body">
+                    <p th:text="${menu.id}"></p>
+                    <h5 class="card-title" th:text="${menu.goodsName}">Menu Name</h5>
+                    <p class="card-text" th:text="'Price: ' + ${menu.goodsPrice}">Price</p>
+                    <p class="card-text" th:text="'Customized:' + ${menu.dishFlavor}">customized</p>
+                    <p class="card-text" th:text="'Number: ' + ${menu.num}">number</p>
+                    <!--                    <a th:href="@{'/menu/deleteMenuItem/' + ${menu.id}}" class="btn btn-danger">Delete</a>-->
+                </div>
+        </div>
+    </div>
+
+    <p >Price: </p>
+    <p th:text="${price}"></p>
+    <script type="text/javascript" color="54,54,54" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><!--背景-->
+
+</body>
+</html>

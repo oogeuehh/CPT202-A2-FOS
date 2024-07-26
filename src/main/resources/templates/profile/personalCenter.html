@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html class="Personal Homepage">
+
+<head class="Personal Homepage">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Personal Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <style>
+        /*非常吃性能,低配手机会卡顿*/
+        /*卡片模糊背景＋黑色透明卡片+白色svg**/
+        html {
+            --name: 主题1;
+            --main_bg_color: linear-gradient(to right, #FF6347, #FFA500);
+            --main_text_color: #eeeeee;
+            --gradient: linear-gradient(120deg, #231651, #4DCCBD 30%, #D6FFF6 60%);
+            --purple_text_color: #747bff;
+            --text_bg_color: #00000040;
+            --item_bg_color: rgba(213, 215, 218, 0.56);
+            --item_hover_color: #33333338;
+            --item_left_title_color: #ffffff;
+            --item_left_text_color: #ffffff;
+            --footer_text_color: #ffffff;
+            --left_tag_item: rgb(27 42 57 / 20%);
+            --card_filter: 15px;
+            --back_filter: 0px;
+            --back_filter_color: #00000030;
+            --fill:#ffffff;
+        }
+        @font-face {
+            font-family: "b";
+
+            src: url(/templates/fonts/Ubuntu-Regular.ttf);
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: "title";
+            /*英文字体*/
+            src: url(/templates/fonts/Pacifico-Regular.ttf);
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            transition: background-color 0.2s ease;
+        }
+
+        a:hover,
+        a:link,
+        a:visited,
+        a:active,
+        a:focus {
+            text-decoration: none;
+            outline: none;
+            border: none;
+            color: inherit;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+
+        /* 设置滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--main_text_color, #000000);
+            border-radius: 8px;
+            height: 20%;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #a2d0ff; /* 或者其他合适的颜色 */
+        }
+
+
+
+
+        html[data-theme="Dark"] {
+            --main_bg_color: rgb(0, 0, 0);
+            --main_text_color: #fff;
+            --gradient:linear-gradient(120deg, rgb(133, 62, 255), #f76cc6 30%, rgb(255, 255, 255) 60%);
+            --purple_text_color: #747bff;
+            --text_bg_color: rgb(26, 4, 48);
+            --item_bg_color: rgb(19, 20, 24);
+            --item_hover_color: rgb(19, 23, 27);
+            --item_left_title_color: rgb(255, 255, 255);
+            --item_left_text_color: rgb(142, 142, 142);
+            --footer_text_color: #646464;
+            --left_tag_item: linear-gradient(50deg, #1f2327, #000000);
+            --card_filter: 0px;
+            --back_filter: 0px;
+            --back_filter_color: #00000000;
+            --fill:#ffffff;
+        }
+
+
+
+
+
+
+        body {
+            display: flex;
+            height: 100%;
+            min-height: 100vh;
+            width: 100%;
+            position: relative;
+            font-family: "b",  "a", sans-serif;
+            background: var(--main_bg_color);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            transition: color 0.1s ease;
+            justify-content: center;
+            color: var(--main_text_color);
+
+        }
+        @keyframes zoom {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+        .filter {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            backdrop-filter: blur(var(--back_filter));
+            /*-webkit-backdrop-filter: blur(var(--back-filter));*/
+            z-index: -99999999;
+            background: var(--back_filter_color);
+        }
+
+        .main {
+
+            width: 100%;
+            transition: transform 0.5s ease;
+            max-width: 1150px;
+            position: relative;
+            flex-direction: row;
+        }
+
+        .pc-left {
+            overflow-y: scroll;
+            width: 230px;
+            height: 100vh;
+            display: flex;
+            padding: 0 15px;
+            position: fixed;
+            align-items: center;
+            flex-direction: column;
+        }
+
+
+        .pc-left::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        .logo {
+            flex-shrink: 0;
+            width: 90%;
+            position: relative;
+            aspect-ratio: 1/1;
+            margin-top: 50px;
+            background-size: cover;
+            border-radius: 50%;
+        }
+        .left-div {
+            flex-shrink: 0;
+            width: 100%;
+            border-radius: 13px;
+            margin-top: 15px;
+            padding: 20px;
+            backdrop-filter: blur(var(--card_filter));
+            background: var(--item_bg_color);
+        }
+
+        .left-des {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .left-des-item {
+            display: flex;
+            align-items: center;
+            line-height: 20px;
+            font-size: 15px;
+            margin-bottom: 5px;
+            overflow: hidden;
+        }
+
+        .left-des-item i,.left-des-item svg{
+            width: 16px;
+            height: 16px;
+            fill:var(--fill);
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        #line li {
+            list-style: none;
+            position: relative;
+            padding: 15px 0px 0px 15px;
+            border-left: 2px solid #d5d5d5;
+            border-radius: 0;
+            scroll-snap-align: end;
+            color: var(--main_text_color);
+        }
+
+        #line li:first-child .focus:first-child {
+            background-color: #aaffcd;
+            animation: focus 1.8s ease infinite;
+        }
+        .pc-right {
+            width: calc(100% - 230px);
+            display: flex;
+            padding: 24px;
+            position: relative;
+            float: right;
+            padding-bottom: 50px;
+            flex-direction: column;
+        }
+
+        .welcome {
+
+            font-size: 55px;
+            font-weight: 800;
+            margin: 20px 0;
+        }
+        .gradientText {
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200%;
+            background-position: 0%;
+            font-family: "title";
+            animation: backgroundSizeAnimation 10s ease-in-out infinite;
+            background-image:  var(--gradient);
+        }
+
+        @keyframes backgroundSizeAnimation {
+            0% {
+                background-position: 100%;
+            }
+
+            25% {
+                background-position: 50%;
+            }
+
+            50% {
+                background-position: 0%;
+            }
+
+            75% {
+                background-position: 50%;
+            }
+
+            100% {
+                background-position: 100%;
+            }
+
+        }
+        .iconContainer {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            overflow-x: scroll;
+            margin-top: 20px;
+        }
+        .iconContainer::-webkit-scrollbar {
+            display: none;
+        }
+        .iconItem {
+            width: 49px;
+            height: 43px;
+            box-sizing: border-box;
+            border-radius: 7px;
+            display: flex;
+            margin-left: 10px;
+
+            backdrop-filter: blur(var(--card_filter));
+            background: var(--item_bg_color);
+            align-items: center;
+            justify-content: center;
+            transition: width 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+            flex-shrink: 0;
+        }
+        .iconItem i,.iconItem svg{
+            width: 22px;
+            height: 22px;
+            fill:var(--fill);
+            font-size: 22px;
+            margin-right: 3px;
+        }
+        .iconTip {
+            white-space: nowrap;
+            display: none;
+        }
+        .iconItem:hover {
+            width: 150px;
+            transform: translateY(-2px);
+            background: var(--item_hover_color);
+        }
+
+
+        .iconItem:hover .iconTip {
+            display: block;
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            font-size: 26px;
+            font-weight: 800;
+            margin: 20px 0;
+            transition: transform 0.4s ease;
+        }
+        .title i ,.title svg{
+            margin-right: 8px;
+            height: 26px;
+            width: 26px;
+            fill:var(--fill);
+        }
+        .title:hover {
+            transform: translateY(-5px);
+        }
+
+        .projectList {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .projectItem {
+            margin: 7px;
+            display: flex;
+            background-color: var(--item_bg_color);
+            border-radius: 8px;
+            padding: 15px;
+            height: 90px;
+            width: calc(25% - 15px);
+            backdrop-filter: blur(var(--card_filter));
+            transition: opacity 0.3s ease, background-color 0.3s ease, border 0.3s ease, transform 0.2s ease;
+
+
+        }
+
+        .projectItem {
+            display: flex;
+            background-color: var(--item_bg_color);
+            border-radius: 8px;
+            padding: 15px;
+            height: 70px;
+            width: calc(25% - 15px);
+            backdrop-filter: blur(var(--card_filter));
+            transition: opacity 0.5s ease, background-color 0.2s ease, border 0.2s ease, transform 0.3s ease;
+
+        }
+
+
+        .projectItem:hover {
+            box-shadow: 0 8px 16px -4px #2c2d300c;
+            transform: translateY(-2px);
+
+        }
+
+        .projectItem.pressed {
+            transform: scale(0.9);
+            /* 缩小到原来的0.9倍 */
+            background-color: var(--item_hover_color);
+        }
+
+        .projectItem:hover .projectItemLeft {
+            width: 100%;
+        }
+
+        .projectItem:hover .projectItemRight {
+            width: 0%;
+        }
+
+        .projectItem:hover .projectItemRight img {
+            transform: rotate(40deg);
+        }
+
+        .projectItem:hover h1 {
+            font-size: 22px;
+        }
+        .projectItemLeft h1 {
+            font-weight: normal;
+            font-size: 20px;
+            margin: 0px;
+
+            transition: font-size 0.4s ease;
+            color: var(--item_left_title_color);
+        }
+
+        .projectItemLeft {
+            display: flex;
+            align-items: center;
+            transition: width 0.4s ease;
+            height: 100%;
+            width: 80%;
+        }
+
+
+        .projectItemRight {
+            overflow: hidden;
+            transition: width 0.4s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20%;
+            height: 100%;
+        }
+
+        .projectItemRight img {
+
+            height: 39px;
+            width: 39px;
+
+        }
+        footer {
+            position: absolute;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            background: var(--item_bg_color);
+            color: var(--footer_text_color);
+            font-size: 13px;
+            bottom: 0;
+        }
+
+        @media (max-width: 1150px) {
+            .a {
+                width: calc(50% - 20px);
+            }
+            .projectItem{
+                margin: 10px;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .pc-left {
+                display: none;
+            }
+
+            .a .projectItemRight {
+                display: none;
+
+            }
+
+            .a .projectItemRight img {
+                display: none;
+
+            }
+
+            .a .projectItemLeft {
+                width: 100%;
+            }
+
+            .a {
+
+                width: calc(50% - 18px);
+                margin: 9px;
+
+            }
+
+            .pc-right {
+                width: 100%;
+            }
+
+            .welcome {
+                font-size: 48px;
+
+            }
+
+
+            .projectItemLeft p {
+                font-size: 13px;
+            }
+
+            .projectItemLeft h1 {
+
+                font-size: 18px;
+            }
+
+            .projectItem:hover h1 {
+
+                font-size: 20px;
+
+            }
+        }.description {
+             font-size: 20px;
+             margin-top: 7px;
+         }
+
+        /* 弹窗样式 */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(250, 250, 250, 0.9); /* 浅色背景，带有透明度 */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+            z-index: 9999;
+        }
+
+        .popup input {
+            text-align: center;
+            border: none;
+            background-color: rgba(239, 248, 250, 0.1);
+            border-bottom: 1px solid #FF6347;
+            width: 260px;
+            margin-bottom: 10px; /* 调整输入框之间的间距 */
+        }
+
+        .popup p {
+            text-align: center;
+            color: rgb(116, 114, 114);
+        }
+
+        .popup button {
+            border: none;
+            background-color: #FF6347;
+            color: white;
+            border-radius: 15px;
+            width: 190px;
+            height: 31px;
+            font-size: 16px;
+        }
+        .popup label,
+        .popup h2 {
+            color: #333; /* 设置字体颜色为黑色，或者根据需要设置其他颜色 */
+        }
+        /*****************************************************************/
+        .navigation {
+
+            background-color: #f8f9fa; /* 导航栏背景颜色 */
+            padding: 20px 0; /* 上下内边距 */
+            border-bottom: 1px solid #ddd; /* 底部边框 */
+        }
+
+        .navigation ul {
+            list-style-type: none; /* 去除列表项的默认样式 */
+            margin: 0; /* 去除外边距 */
+            padding: 0; /* 去除内边距 */
+        }
+
+        .navigation li {
+            display: inline-block; /* 列表项水平排列 */
+            margin-right: 20px; /* 右侧间距 */
+        }
+
+        .navigation li:last-child {
+            margin-right: 0; /* 最后一个列表项去除右侧间距 */
+        }
+
+        .navigation a {
+            color: #2c0808; /* 链接文字颜色 */
+            text-decoration: none; /* 去除下划线 */
+            font-weight: bold; /* 文字加粗 */
+            font-size: 20px;
+        }
+
+        .navigation a:hover {
+            color: #dc3545; /* 鼠标悬停时链接文字颜色 */
+        }
+
+        .section-btn a.small-btn i.fa {
+            font-size: 20px; /* 设置图标的字体大小 */
+        }
+
+
+
+
+    </style>
+
+</head>
+
+<body>
+<section class = "navigation">
+    <link rel="preload" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/fonts/fontawesome-webfont.woff2" as="font" type="font/woff2" crossorigin=""/>
+    <!--        <link rel="preload" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/images/home-bg.jpg" as="image" crossorigin=""/>-->
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/magnific-popup.css"/>
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/font-awesome.min.css"/>
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/templatemo-style.css"/>
+    <div class="container">
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-nav-first">
+                <li>
+                    <a href="/customer/homepage" >Homepage</a>
+                </li>
+                <li>
+                    <a href="/customer/CustomMenu" >Menu</a>
+                </li>
+
+                <li>
+                    <a href="/cart/viewCart" >Cart</a>
+                </li>
+
+                <li>
+                    <a href="/customer/allPastOrder" >Orders</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#"><i class="fa fa-bookmark"></i></a>
+                </li>
+                <li>
+                    <a href="/user/profile"><i class ="fa fa-user-circle"></i>Profile</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<div class="filter"></div>
+<div class="main">
+    <div class="pc-left">
+        <div class="logo" style="position: relative; overflow: hidden;">
+            <img style="position: absolute; top: -15%; left: -10%; width: 120%; aspect-ratio: 1/1; z-index: -1; border-radius: 50%;" src="/image/customer-5.jpg">
+        </div>
+
+        <div class="left-div left-des">
+            <div class="left-des-item"><svg t="1705773709627" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1478"><path d="M512 249.976471c-99.388235 0-180.705882 81.317647-180.705882 180.705882s81.317647 180.705882 180.705882 180.705882 180.705882-81.317647 180.705882-180.705882-81.317647-180.705882-180.705882-180.705882z m0 301.17647c-66.258824 0-120.470588-54.211765-120.470588-120.470588s54.211765-120.470588 120.470588-120.470588 120.470588 54.211765 120.470588 120.470588-54.211765 120.470588-120.470588 120.470588z" p-id="1479"></path><path d="M512 39.152941c-216.847059 0-391.529412 174.682353-391.529412 391.529412 0 349.364706 391.529412 572.235294 391.529412 572.235294s391.529412-222.870588 391.529412-572.235294c0-216.847059-174.682353-391.529412-391.529412-391.529412z m0 891.482353C424.658824 873.411765 180.705882 686.682353 180.705882 430.682353c0-183.717647 147.576471-331.294118 331.294118-331.294118s331.294118 147.576471 331.294118 331.294118c0 256-243.952941 442.729412-331.294118 499.952941z" p-id="1480"></path></svg>China-Henan
+            </div>
+            <div class="left-des-item"><svg t="1705773906032" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2474"><path d="M729.6 234.666667H294.4V157.866667a51.2 51.2 0 0 1 51.2-51.2h332.8a51.2 51.2 0 0 1 51.2 51.2v76.8z m179.2 51.2a51.2 51.2 0 0 1 51.2 51.2v512a51.2 51.2 0 0 1-51.2 51.2H115.2a51.2 51.2 0 0 1-51.2-51.2v-512a51.2 51.2 0 0 1 51.2-51.2h793.557333z m-768 172.032c0 16.384 13.312 29.696 29.696 29.696h683.008a29.696 29.696 0 1 0 0-59.392H170.410667a29.696 29.696 0 0 0-29.696 29.696z m252.416 118.784c0 16.384 13.312 29.696 29.696 29.696h178.176a29.696 29.696 0 1 0 0-59.392H422.912a29.738667 29.738667 0 0 0-29.696 29.696z" p-id="2475"></path></svg>Sias</div>
+        </div>
+    </div>
+
+    <div class="pc-right">
+        <header>
+
+
+            <div class="welcome">
+                Hello I' m <span class="gradientText" th:text="${user.username}">
+						 </span>
+            </div>
+
+            <div class="description">I love 🍔!
+            </div>
+
+
+            <div class="iconContainer">
+                <a class="iconItem">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props} key={key}><path fill="currentColor" d="M10 20h4v-1h-4zm-3 3q-.825 0-1.412-.587T5 21V3q0-.825.588-1.412T7 1h10q.825 0 1.413.588T19 3v18q0 .825-.587 1.413T17 23zm0-7h10V6H7z"/></svg>
+                    <div class="iconTip"><span th:text="${user.phone}"></span></div>
+                </a>
+
+                <a class="iconItem">
+                    <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3174" >
+                        <path d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"  p-id="3175"></path>
+                    </svg>
+                    <div class="iconTip"><span th:text="${user.email}"></span></div>
+                </a>
+
+                <a class="iconItem" onclick="openPopup()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><path fill="currentColor" d="M3 21v-4.25L16.2 3.575q.3-.275.663-.425t.762-.15q.4 0 .775.15t.65.45L20.425 5q.3.275.438.65T21 6.4q0 .4-.137.763t-.438.662L7.25 21zM17.6 7.8L19 6.4L17.6 5l-1.4 1.4z"/></svg>
+                    <div class="iconTip">Edit</div>
+                </a>
+
+
+                <a class="iconItem" onclick="" href="总之就是设置页面">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><path fill="currentColor" d="m9.25 22l-.4-3.2q-.325-.125-.612-.3t-.563-.375L4.7 19.375l-2.75-4.75l2.575-1.95Q4.5 12.5 4.5 12.338v-.675q0-.163.025-.338L1.95 9.375l2.75-4.75l2.975 1.25q.275-.2.575-.375t.6-.3l.4-3.2h5.5l.4 3.2q.325.125.613.3t.562.375l2.975-1.25l2.75 4.75l-2.575 1.95q.025.175.025.338v.674q0 .163-.05.338l2.575 1.95l-2.75 4.75l-2.95-1.25q-.275.2-.575.375t-.6.3l-.4 3.2zm2.8-6.5q1.45 0 2.475-1.025T15.55 12q0-1.45-1.025-2.475T12.05 8.5q-1.475 0-2.488 1.025T8.55 12q0 1.45 1.013 2.475T12.05 15.5"/></svg>
+                    <div class="iconTip">Settings</div>
+                </a>
+
+            </div>
+        </header>
+
+
+        <content>
+
+            <div class="title"><svg t="1705257422086" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1891" >
+                <path d="M629.333333 202.666667v213.333333h277.333334v448h-512v-213.333333h-277.333334v-448h512z m213.333334 277.333333h-213.333334v170.666667h-170.666666v149.333333h384v-320z m-277.333334-213.333333h-384v320h213.333334v-170.666667h170.666666v-149.333333z m0 213.333333h-106.666666v106.666667h106.666666v-106.666667z"  p-id="1892"></path>
+            </svg></div>
+
+
+            <div class="projectList">
+
+                <a class="projectItem a" target="_blank" href="/">
+                    <div class="projectItemLeft">
+                        <h1>Favorites</h1>
+                    </div>
+                    <div class="projectItemRight">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><path fill="currentColor" d="m5.825 21l1.625-7.025L2 9.25l7.2-.625L12 2l2.8 6.625l7.2.625l-5.45 4.725L18.175 21L12 17.275z"/></svg>
+                    </div>
+                </a>
+
+                <a class="projectItem a" target="_blank" href="/customer/allPastOrder">
+                    <div class="projectItemLeft">
+                        <h1>History</h1>
+                    </div>
+                    <div class="projectItemRight">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21q-3.45 0-6.012-2.287T3.05 13H5.1q.35 2.6 2.313 4.3T12 19q2.925 0 4.963-2.037T19 12q0-2.925-2.037-4.962T12 5q-1.725 0-3.225.8T6.25 8H9v2H3V4h2v2.35q1.275-1.6 3.113-2.475T12 3q1.875 0 3.513.713t2.85 1.924q1.212 1.213 1.925 2.85T21 12q0 1.875-.712 3.513t-1.925 2.85q-1.213 1.212-2.85 1.925T12 21m2.8-4.8L11 12.4V7h2v4.6l3.2 3.2z"/></svg>
+                    </div>
+                </a>
+
+                <a class="projectItem a" target="_blank" href="总之就是地址">
+                    <div class="projectItemLeft">
+                        <h1>Address</h1>
+                    </div>
+                    <div class="projectItemRight">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12q.825 0 1.413-.587T14 10q0-.825-.587-1.412T12 8q-.825 0-1.412.588T10 10q0 .825.588 1.413T12 12m0 10q-4.025-3.425-6.012-6.362T4 10.2q0-3.75 2.413-5.975T12 2q3.175 0 5.588 2.225T20 10.2q0 2.5-1.987 5.438T12 22"/></svg>
+
+                    </div>
+                </a>
+
+            </div>
+
+        </content>
+
+
+    </div>
+</div>
+<footer>
+    Group28 © 2024
+</footer>
+
+
+
+
+<!-- 弹窗 -->
+<div id="popup" class="popup">
+    <h2>Edit User Profile</h2>
+    <form action="/user/saveProfile" method="post" id="editForm" th:value="user">
+        <input required="required" hidden name="id" class="btn" AUTOCOMPLETE="off" th:value="${user.id}"/><br/>
+        <label>Username:</label>
+        <input required="required" name="username" class="btn" AUTOCOMPLETE="off" th:value="${user.username}"/><br/>
+        <label>Email address:</label>
+        <input required="required" name="email" class="btn" AUTOCOMPLETE="off" th:value="${user.email}"/><br/>
+        <label>Phone number:</label>
+        <input required="required" name="phone" class="btn" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" AUTOCOMPLETE="off" th:value="${user.phone}"/><br/>
+        <label>Address:</label>
+        <input required="required" name="address" class="btn" onkeyup="this.value=this.value.replace(/\D/g,'')" AUTOCOMPLETE="off" th:value="${user.address}"/><br/>
+        <button type="submit">Save</button>
+        <!-- 关闭弹窗的按钮 -->
+        <button onclick="closePopup()">Cancel</button>
+    </form>
+</div>
+
+<script>
+    // 打开弹窗
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    // 关闭弹窗
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
+

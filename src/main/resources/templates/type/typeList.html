@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>type List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/magnific-popup.css"/>
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://coscdn.htmlpage.cn/html-template/template-company-00002/css/templatemo-style.css"/>
+    <script src="https://kit.fontawesome.com/5b19e49b1c.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .delete-btn {
+            width: 10%;
+            height: 30px;
+            border-radius: 10px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        /*.btn-form{*/
+        /*    width: 100%;*/
+        /*}*/
+
+        .btn-content{
+            border-radius: 10px;
+
+            height: 30px;
+            color: #ffffff;
+            background-color: #FFA500;
+        }
+
+
+        /*new table style*/
+        #typeTable thead, #typeTable tr {
+            border-top-width: 20px;
+            border-top-style: solid;
+            border-top-color: blanchedalmond;
+        }
+        #typeTable {
+            border-bottom-width: 20px;
+            border-bottom-style: solid;
+            border-bottom-color: blanchedalmond;
+            width: 90%;
+        }
+
+        /* Padding and font style */
+        #typeTable td, #typeTable th {
+            padding: 10px 10px;
+            font-size: 15px;
+            font-family: Verdana;
+            color: black;
+        }
+
+        /* Alternating background colors */
+        #typeTable tr:nth-child(even) {
+            background: #FFCC99;
+        }
+        #typeTable tr:nth-child(odd) {
+            background: #FFF
+        }
+
+
+        input[type=text] {
+            background-color: white;
+            /*background-image: url("/static/icon/search.png");*/
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            padding-left: 40px;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 300px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            /*background-color: #333;*/
+            background-image: linear-gradient(to right, #FF6347, #FFA500);
+            padding-top: 40px;
+        }
+
+        .sidebar a {
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            color: #fff;
+        }
+
+        .sidebar li:last-child {
+            position: fixed;
+            bottom: 50px;
+            left: 0;
+        }
+
+        .sidebar li:nth-last-child(2) {
+            position: fixed;
+            bottom: 100px;
+            left: 0;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+        }
+        .sidebar h1{
+            color: #f0f0f0;
+            margin-right: 15px;
+            margin-left: 15px;
+            display: flex;
+            align-items: center; /* 垂直居中对齐 */
+
+        }
+
+        .sidebar h1 i {
+            margin-right: 15px;
+        }
+
+        .sidebar li {
+            list-style-type: none;
+            font-size: 18px;
+            height: 50px;
+            width: 300px;
+
+        }
+        .sidebar li a {
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar li a i {
+            margin-right: 15px;
+        }
+        .content {
+            margin-left: 300px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .pagination {
+            text-align: center; /* 将页码居中显示 */
+        }
+
+        .pagination div {
+            display: inline-block; /* 将每个页码容器设置为内联块级元素 */
+        }
+
+        .pagination a,
+        .pagination span {
+            padding: 5px 10px; /* 给页码添加一些内边距 */
+            text-decoration: none; /* 移除链接的下划线 */
+            color: #333; /* 设置页码的颜色 */
+        }
+
+        .pagination .active a {
+            font-weight: bold; /* 设置当前页码为粗体 */
+            color: #fff; /* 设置当前页码的文本颜色 */
+            background-color: #007bff; /* 设置当前页码的背景颜色 */
+        }
+
+        .pagination .disabled a,
+        .pagination .disabled span {
+            pointer-events: none; /* 禁用禁用状态下的链接 */
+            color: #6c757d; /* 设置禁用状态下的文本颜色 */
+        }
+
+        .btgn {
+            background-color: #f16b00;
+            color: white; /* 白色文字 */
+        }
+
+    </style>
+    <script>
+        function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("customerTable");
+            switching = true;
+            dir = "asc";
+
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                    // Check if the values are numeric and compare as numbers.
+                    var xValue = isNaN(x.innerHTML) ? x.innerHTML.toLowerCase() : parseFloat(x.innerHTML);
+                    var yValue = isNaN(y.innerHTML) ? y.innerHTML.toLowerCase() : parseFloat(y.innerHTML);
+
+                    if (dir == "asc") {
+                        if (xValue > yValue) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (xValue < yValue) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="sidebar" th:replace="sidebar :: sidebarContent"></div>
+<div class="content">
+    <span class="span"  style="color: #f16b00; font-size: 40px;font-weight: bold" >Type List</span>
+    <hr/>
+    <div class="searchBar">
+        <form class="form-inline" action="/type/typeList" method="GET">
+            <input class="form-control" type="text" value="" id="keywords" name="keywords" placeholder="type name " data-parsley-required="true">
+            <button type="submit" style="background-color: #f16b00; color: #fffdf5"><i class="fa fa-search m-r-5"></i>搜索</button>
+        </form>
+    </div>
+    <div class="add-btn">
+        <form th:action="@{/type/addType}" class="btn-form">
+            <input class="btn-content" type="submit" value="Add new type">
+        </form>
+    </div>
+
+    <table id="typeTable">
+        <thead>
+        <tr>
+            <th class="btgn" onclick="sortTable(0)">ID</th>
+            <th class="btgn" onclick="sortTable(1)">typename</th>
+            <th class="btgn" onclick="sortTable(2)">descr</th>
+            <th class="btgn">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="type : ${pageInfo.list}">
+            <td th:text="${type.id}">ID</td>
+            <td th:text="${type.typeName}">typeName</td>
+            <td th:text="${type.descr}">Descr</td>
+
+
+            <td><a th:href="@{'/type/deleteType/' + ${type.id}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+            <a th:href="@{'/type/updateType/' + ${type.id}}" class="btn btn-primary">Update</a>
+            <a th:href="@{'/type/foodlist/' + ${type.id}}" class="btn btn-primary">Query dishes</a></td>
+
+
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${pageInfo.pages > 1}" class="pagination">
+        <!-- 上一页 -->
+        <div th:class="${pageInfo.hasPreviousPage} ? '' : 'disabled'">
+            <a th:if="${pageInfo.hasPreviousPage}" th:href="@{'?pageNum=' + ${pageInfo.prePage} + '&pageSize=' + ${pageInfo.pageSize}}">&laquo;</a>
+            <span th:if="${!pageInfo.hasPreviousPage}">&laquo;</span>
+        </div>
+        <!-- 页码 -->
+        <div th:each="pageNumber : ${#numbers.sequence(1, pageInfo.pages)}" th:class="${pageNumber == pageInfo.pageNum} ? 'active' : ''">
+            <a th:href="@{'?pageNum=' + ${pageNumber} + '&pageSize=' + ${pageInfo.pageSize}}" th:text="${pageNumber}"></a>
+        </div>
+        <!-- 下一页 -->
+        <div th:class="${pageInfo.hasNextPage} ? '' : 'disabled'">
+            <a th:if="${pageInfo.hasNextPage}" th:href="@{'?pageNum=' + ${pageInfo.nextPage} + '&pageSize=' + ${pageInfo.pageSize}}">&raquo;</a>
+            <span th:if="${!pageInfo.hasNextPage}">&raquo;</span>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript" color="54,54,54" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><!--背景-->
+
+</body>
+</html>

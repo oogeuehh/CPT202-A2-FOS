@@ -1,0 +1,128 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>orderInfo homepage</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-image: linear-gradient(to right, #FF6347, #FFA500);
+        }
+        table {border-collapse: collapse; font-size: 14px;
+            width: 80%; margin: auto}
+        table, th, td {border: 0px solid darkslategray;padding: 10px}
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        tr:nth-child(2n){
+            background-color:#FFCC99;
+        }
+        tr:nth-child(2n+1) {
+            background-color: #99CC99;
+        }
+
+        .c{
+            width: 200px;
+        }
+
+        .menu-detail {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .back-button-container {
+            position: absolute; /* Position it relative to the nearest positioned ancestor */
+            top: 10px; /* Space from the top */
+            left: 10px; /* Space from the right */
+            z-index: 100; /* Make sure it's above other elements */
+            padding: 8px 16px; /* 按钮内边距，可以根据需要调整 */
+            background-color: #ffffff;
+            color: #f16b00; /* 文字颜色为白色 */
+            border: none; /* 无边框 */
+            cursor: pointer; /* 鼠标悬停时显示指针 */
+            border-radius: 5px; /* 圆角边框 */
+            font-size: 16px; /* 字体大小 */
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        h1 {
+            text-align: center;
+        }
+        input[type=text] {
+            width: 100%;
+            padding: 8px 16px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            box-shadow: inset 1px 1px 3px #aaa;
+            border-radius: 10px;
+        }
+        button {
+            border-color: black;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="back-button-container">
+    <a class="back-button">&lt; Back</a>
+</div>
+
+<h1>Edit order information</h1>
+<div class="menu-detail">
+    <div >
+
+
+        <!--    <form action="/Order/edit" method="post" class="c" th:value="orderInfo">-->
+        <!--        <tr><th class="ccc"></th> <input required="required" hidden name="id" class="btn" AUTOCOMPLETE="off"  th:value="${orderInfo.id}"/></tr> <br/>-->
+        <!--        <tr><th class="ccc">用户名:</th> <input required="required"  name="username"class="btn"  AUTOCOMPLETE="off"  th:value="${orderInfo.user?.username}"/></tr> <br/>-->
+        <!--        <tr><th class="btgn">address:</th> <input required="required" name="address" class="btn"  AUTOCOMPLETE="off"   th:value="${orderInfo.user?.address}"/> </tr><br/>-->
+        <!--        <tr><th class="ccc">手机号:</th> <input  required="required" name="mobile"class="btn" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')"    AUTOCOMPLETE="off"  th:value="${orderInfo.user?.phone}"/> </tr><br/>-->
+        <!--        <button type="submit">提交</button>-->
+        <!--    </form>-->
+        <form action="/Order/updateOrders" method="post" class="c" th:value="${orderInfo}">
+            <tr>
+                <th class="ccc"></th>
+                <input required="required" hidden name="id" class="btn" AUTOCOMPLETE="off" th:value="${orderInfo.id}"/>
+            </tr>
+            <br/>
+            <tr>
+                <th class="btgn">Address:</th>
+                <input type="text" required="required" name="address"  class="btn" AUTOCOMPLETE="off" th:value="${orderInfo.address}"/>
+            </tr>
+            <br/><br>
+
+            <tr>
+                <th class="ccc">Phone:</th>
+                <input type="text" required="required" name="phone" class="btn" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" AUTOCOMPLETE="off" th:value="${orderInfo.phone}"/>
+            </tr>
+            <br/><br>
+            <tr>
+                <th class="ccc">Username:</th>
+                <select name="username" class="btn" required="required">
+                    <option value="">select</option>
+                    <th:block th:each="user : ${userList}">
+                        <option th:value="${user.username}" th:text="${user.username}" th:selected="${user.username == orderInfo.userName}"></option>
+                    </th:block>
+                </select>
+            </tr>
+            <br/><br>
+            <button type="submit">Save Changes</button>
+        </form>
+
+
+    </div>
+</div>
+<script type="text/javascript" color="54,54,54" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><!--背景-->
+
+</body>
+</html>
